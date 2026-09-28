@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { absoluteUrl, getSiteOrigin } from '../lib/site';
+import { games as baseGames } from '../data/games';
+
+const siteOrigin = getSiteOrigin(Astro.site);
+
+const sectionDefinitions = [
+  {
+    key: 'rpg-maker',
+    name: 'RPG Maker',
+    editor: '/editor/rpg-maker-mv',
+    match: (game: (typeof baseGames)[number]) => game.editorPath === '/editor/rpg-maker-mv',
+  },
+  {
+    key: 'renpy',
+    name: "Ren'Py",
+    editor: '/editor/renpy',
+    match: (game: (typeof baseGames)[number]) => game.editorPath === '/editor/renpy',
+  },
+  {
+    key: 'unity',
+    name: 'Unity',
+    editor: '/editor/unity',
+    match: (game: (typeof baseGames)[number]) => game.editorPath === '/editor/unity',
+  },
+  {
+    key: 'unreal',
+    name: 'Unreal Engine',
+    editor: '/editor/palworld',
+    match: (game: (typeof baseGames)[number]) => game.engine.includes('Unreal'),
+  },
+  {
+    key: 'gamemaker',
+    name: 'GameMaker',
+    editor: '/editor/gamemaker',
+    match: (game: (typeof baseGames)[number]) => game.editorPath === '/editor/gamemaker',
+  },
+];
+
+const splitFormats = (format: string) =>
+  format
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const games = sectionDefinitions
+  .map((section) => {
+    const items = baseGames.filter(section.match);
+    return {
+      ...section,
+      formats: [...new Set(items.flatMap((game) => splitFormats(game.format)))],
+      games: items,
+    };
+  })
+  .filter((section) => section.games.length > 0);
+
+const totalGames = baseGames.length;
+
+const popularSlugs = ['stardew-valley', 'palworld', 'undertale', 'hollow-knight', 'ddlc', 'rpg-maker'];
+const popularGames = popularSlugs.map(slug => {
+  const g = baseGames.find(x => x.slug === slug);
+  return {
+    name: g?.name || slug,
+    slug: slug,
+    image: g?.image || '/images/games/default.webp',
+    engine: g?.engine || 'Game Engine'
+  };
+});
+---
+
+<BaseLayout
+  title="Supported Games List | SaveFileTool"
+  description="Browse the real game pages supported by our save editor. Find your save file path, compatible fields, support limits, and upload entry."
+  keywords="save editor games, rpg maker games, unity games, unreal engine games, supported games list"
+>
+  <section class="flex-grow container mx-auto px-4 py-12">
+    <div class="max-w-6xl mx-auto">
+      <!-- Hero Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-6">
+          Supported <span class="text-primary-600">Games</span>
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          Browse <span class="font-bold text-primary-600">{totalGames}</span> live game pages with save locations, compatible fields, limits, and upload entry.
+        </p>
+
+        <!-- Search Box -->
+        <div class="max-w-md mx-auto">
+          <div class="relative">
+            <input
+              type="text"
+              id="game-search"
+              placeholder="Search for your game..."
+              class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+            />
+            <svg
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <p id="search-results-count" class="text-sm text-gray-500 mt-2 hidden"></p>
+        </div>
+      </div>
+
+      <!-- Popular Games Grid -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Popular Games</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            popularGames.map((game) => (
+              <a
+                href={`/games/${game.slug}`}
+                class="group relative block overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+                <img
+                  src={game.image}
+                  alt={game.name}
+                  class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-0 left-0 p-6 z-20 text-white">
+                  <span class="text-xs font-semibold bg-primary-600 px-2 py-1 rounded mb-2 inline-block">
+                    {game.engine}
+                  </span>
+                  <h3 class="text-xl font-bold group-hover:text-primary-300 transition-colors">
+                    {game.name}
+                  </h3>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Engine Sections -->
+      <div class="space-y-12">
+        {
+          games.map((engine) => (
+            <section
+              class="engine-section bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+              data-engine={engine.key}
+            >
+              <div class="bg-gradient-to-r from-primary-600 to-primary-700 p-6 text-white">
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <h2 class="text-2xl font-bold">{engine.name}</h2>
+                    <p class="text-primary-100 text-sm mt-1">
+                      Formats: {engine.formats.join(', ')}
+                    </p>
+                  </div>
+                  <a
+                    href={engine.editor}
+                    class="bg-white text-primary-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-50 transition-colors"
+                  >
+                    Open Editor →
+                  </a>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-2">
+                  {engine.games.map((game) => (
+                    <a
+                      href={`/games/${game.slug}`}
+                      class="game-tag px-3 py-1.5 bg-gray-100 hover:bg-primary-100 hover:text-primary-700 rounded-full text-sm text-gray-700 transition-all hover:scale-105"
+                      data-game={game.name.toLowerCase()}
+                    >
+                      {game.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <!-- CTA Section -->
+      <div class="mt-16 text-center bg-gray-900 text-white rounded-2xl p-12">
+        <h2 class="text-3xl font-bold mb-4">Don't See Your Game?</h2>
+        <p class="text-gray-300 mb-8 max-w-xl mx-auto">
+          Open the generic editor when no dedicated editor exists. Some formats may be read-only
+          until safe export is proven.
+        </p>
+        <a
+          href="/editor/generic"
+          class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-gray-900 bg-white hover:bg-gray-100 transition-colors"
+        >
+          Open Generic Editor
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const searchInput = document.getElementById('game-search') as HTMLInputElement;
+    const resultsCount = document.getElementById('search-results-count');
+    const gameTags = document.querySelectorAll('.game-tag');
+    const engineSections = document.querySelectorAll('.engine-section');
+
+    searchInput?.addEventListener('input', (e) => {
+      const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+
+      if (!query) {
+        // Show all
+        gameTags.forEach((tag) =>
+          tag.classList.remove('hidden', 'bg-primary-200', 'text-primary-800')
+        );
+        engineSections.forEach((section) => section.classList.remove('hidden'));
+        if (resultsCount) resultsCount.classList.add('hidden');
+        return;
+      }
+
+      let matchCount = 0;
+
+      engineSections.forEach((section) => {
+        let sectionHasMatch = false;
+        const tags = section.querySelectorAll('.game-tag');
+
+        tags.forEach((tag) => {
+          const gameName = tag.getAttribute('data-game') || '';
+          if (gameName.includes(query)) {
+            tag.classList.remove('hidden');
+            tag.classList.add('bg-primary-200', 'text-primary-800');
+            sectionHasMatch = true;
+            matchCount++;
+          } else {
+            tag.classList.add('hidden');
+            tag.classList.remove('bg-primary-200', 'text-primary-800');
+          }
+        });
+
+        if (sectionHasMatch) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+
+      if (resultsCount) {
+        resultsCount.textContent = `Found ${matchCount} game${matchCount !== 1 ? 's' : ''}`;
+        resultsCount.classList.remove('hidden');
+      }
+    });
+  </script>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Supported Games List',
+      description:
+        "Browse supported game pages for our save editor. Includes RPG Maker, Unity, Unreal Engine, Ren'Py, GameMaker and more.",
+      orderBy: 'name',
+      itemListElement: baseGames.map((game, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: game.name,
+        url: absoluteUrl(`/games/${game.slug}`, siteOrigin),
+      })),
+    })}
+  />
+</BaseLayout>

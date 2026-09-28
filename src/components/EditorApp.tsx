@@ -21,7 +21,7 @@ export default function EditorApp({ acceptedFileTypes, editorSlug }: EditorAppPr
     const [file, setFile] = useState<File | null>(null);
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [unsupportedFile, setUnsupportedFile] = useState<File | null>(null);
-    const [unsupportedSupportHref, setUnsupportedSupportHref] = useState('mailto:support@saveeditor.top');
+    const [unsupportedSupportHref, setUnsupportedSupportHref] = useState('mailto:support@savefiletool.com');
     const [restoreError, setRestoreError] = useState<string | null>(null);
     const currentLang =
         typeof document !== 'undefined' ? document.documentElement.getAttribute('lang') || 'en' : 'en';
@@ -29,7 +29,7 @@ export default function EditorApp({ acceptedFileTypes, editorSlug }: EditorAppPr
     const [isRestoringUpload, setIsRestoringUpload] = useState(() =>
         typeof window !== 'undefined' ? Boolean(readUploadToken(window.location.search)) : false
     );
-    const requestSupportMailto = unsupportedFile ? unsupportedSupportHref : 'mailto:support@saveeditor.top';
+    const requestSupportMailto = unsupportedFile ? unsupportedSupportHref : 'mailto:support@savefiletool.com';
     const homeHref = localizePath('/', currentLang);
 
     const validateFile = (selectedFile: File): boolean => {
@@ -64,7 +64,7 @@ export default function EditorApp({ acceptedFileTypes, editorSlug }: EditorAppPr
     React.useEffect(() => {
         let cancelled = false;
         if (!unsupportedFile) {
-            setUnsupportedSupportHref('mailto:support@saveeditor.top');
+            setUnsupportedSupportHref('mailto:support@savefiletool.com');
             return;
         }
 

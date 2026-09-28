@@ -7,7 +7,7 @@ import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import { rehypeLazyLoadImages } from './src/plugins/rehype-lazy-image.mjs';
 
-const siteOrigin = process.env.PUBLIC_SITE_ORIGIN || 'https://saveeditor.top';
+const siteOrigin = process.env.PUBLIC_SITE_ORIGIN || 'https://savefiletool.com';
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,7 +30,7 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "ja", "pt", "ko", "zh-cn", "es", "ru"],
+    locales: ["en"],
     routing: {
       prefixDefaultLocale: false
     }

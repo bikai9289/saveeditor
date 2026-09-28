@@ -2,7 +2,7 @@
 
 > Free, browser-based save file editor for compatible local game saves.
 
-For full documentation, see: https://saveeditor.top/llms-full.txt
+For full documentation, see: https://savefiletool.com/llms-full.txt
 
 ## Core Engines
 
@@ -40,9 +40,9 @@ For full documentation, see: https://saveeditor.top/llms-full.txt
 
 ## Full Locale URLs
 
-- English: https://saveeditor.top/games/, https://saveeditor.top/formats/, https://saveeditor.top/compatibility/, https://saveeditor.top/coverage-proof/
-- 简体中文: https://saveeditor.top/zh-cn/games/, https://saveeditor.top/zh-cn/formats/, https://saveeditor.top/zh-cn/compatibility/, https://saveeditor.top/zh-cn/coverage-proof/
-- 日本語: https://saveeditor.top/ja/games/, https://saveeditor.top/ja/formats/, https://saveeditor.top/ja/compatibility/, https://saveeditor.top/ja/coverage-proof/
+- English: https://savefiletool.com/games/, https://savefiletool.com/formats/, https://savefiletool.com/compatibility/, https://savefiletool.com/coverage-proof/
+- 简体中文: https://savefiletool.com/zh-cn/games/, https://savefiletool.com/zh-cn/formats/, https://savefiletool.com/zh-cn/compatibility/, https://savefiletool.com/zh-cn/coverage-proof/
+- 日本語: https://savefiletool.com/ja/games/, https://savefiletool.com/ja/formats/, https://savefiletool.com/ja/compatibility/, https://savefiletool.com/ja/coverage-proof/
 
 ## Privacy
 

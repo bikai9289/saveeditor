@@ -1,6 +1,6 @@
 # Compatibility Matrix
 
-This folder documents parser support levels used by SaveEditor.top.
+This folder documents parser support levels used by SaveFileTool.
 
 Legend:
 

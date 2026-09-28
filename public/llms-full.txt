@@ -6,7 +6,7 @@
 ## Site Identity
 
 - **Name**: SaveEditor.top
-- **URL**: https://saveeditor.top
+- **URL**: https://savefiletool.com
 - **Type**: Free web application
 - **Category**: UtilitiesApplication
 - **Operating System**: Web Browser
@@ -19,7 +19,7 @@
 - **Sample records**: 10
 - **Verified presets**: 2
 - **Candidate presets**: 27
-- **Coverage proof**: https://saveeditor.top/coverage-proof/
+- **Coverage proof**: https://savefiletool.com/coverage-proof/
 
 ## Language Coverage
 
@@ -108,19 +108,19 @@
 
 ## Core URLs
 
-- https://saveeditor.top/
-- https://saveeditor.top/formats/
-- https://saveeditor.top/compatibility/
-- https://saveeditor.top/coverage-proof/
-- https://saveeditor.top/games/
-- https://saveeditor.top/zh-cn/games/
-- https://saveeditor.top/zh-cn/coverage-proof/
-- https://saveeditor.top/ja/games/
-- https://saveeditor.top/ja/coverage-proof/
-- https://saveeditor.top/editor/rpg-maker-mv/
-- https://saveeditor.top/editor/renpy/
-- https://saveeditor.top/editor/palworld/
-- https://saveeditor.top/editor/generic/
+- https://savefiletool.com/
+- https://savefiletool.com/formats/
+- https://savefiletool.com/compatibility/
+- https://savefiletool.com/coverage-proof/
+- https://savefiletool.com/games/
+- https://savefiletool.com/zh-cn/games/
+- https://savefiletool.com/zh-cn/coverage-proof/
+- https://savefiletool.com/ja/games/
+- https://savefiletool.com/ja/coverage-proof/
+- https://savefiletool.com/editor/rpg-maker-mv/
+- https://savefiletool.com/editor/renpy/
+- https://savefiletool.com/editor/palworld/
+- https://savefiletool.com/editor/generic/
 
 ## Safety Boundary
 

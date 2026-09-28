@@ -1,9 +1,9 @@
-export const SITE_ORIGIN = 'https://saveeditor.top';
+export const SITE_ORIGIN = 'https://savefiletool.com';
 
-export const SITE_LOCALES = ['en', 'ja', 'ko', 'pt', 'zh-cn', 'es', 'ru'] as const;
+export const SITE_LOCALES = ['en'] as const;
 export type SiteLocale = (typeof SITE_LOCALES)[number];
 
-const LOCALE_PREFIX_RE = /^\/(ja|ko|pt|zh-cn|es|ru)(?=\/|$)/;
+const LOCALE_PREFIX_RE = /^\/en(?=\/|$)/;
 
 export function getSiteOrigin(site?: URL | string | null): string {
   const configured = typeof site === 'string' ? site : site?.toString();

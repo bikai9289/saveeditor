@@ -21,7 +21,7 @@ export function localizePath(path: string, lang?: string | null): string {
     }
 
     const normalized = normalizeLang(lang);
-    const stripped = path.replace(/^\/+(ja|pt|ko|zh-cn|es|ru)(?=\/|$)/, '');
+    const stripped = path.replace(/^\/+en(?=\/|$)/, '');
     const cleanPath = stripped.startsWith('/') ? stripped : `/${stripped}`;
     const normalizedPath = cleanPath === '/' ? '/' : cleanPath.replace(/\/+$/, '') + '/';
 

@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Contact Us | SaveEditor.top"
-  description="Get in touch with the SaveEditor.top team. Report bugs, suggest features, or reach out for business inquiries regarding our save editing tool."
+  title="Contact Us | SaveFileTool"
+  description="Get in touch with the SaveFileTool team. Report bugs, suggest features, or reach out for business inquiries regarding our save editing tool."
 >
   <section class="container mx-auto px-4 py-12 max-w-6xl">
     <h1 class="text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white">Contact Us</h1>
@@ -39,8 +39,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
             <div>
               <div class="font-bold text-gray-900 dark:text-white">Email Support</div>
-              <a href="mailto:support@saveeditor.top" class="text-primary-600 hover:underline"
-                >support@saveeditor.top</a
+              <a href="mailto:support@savefiletool.com" class="text-primary-600 hover:underline"
+                >support@savefiletool.com</a
               >
             </div>
           </div>
@@ -54,10 +54,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div>
               <div class="font-bold text-gray-900 dark:text-white">Report a Bug</div>
               <a
-                href="https://github.com/paradoxie/saveeditor/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary-600 hover:underline">Open GitHub Issue</a
+                href="mailto:support@savefiletool.com?subject=SaveFileTool%20bug%20report"
+                class="text-primary-600 hover:underline">Email support</a
               >
             </div>
           </div>
@@ -172,16 +170,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const mailSubject = `[SaveEditor Contact] ${subject?.toString().toUpperCase()}: ${name}`;
       const mailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
-      window.location.href = `mailto:support@saveeditor.top?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+      window.location.href = `mailto:support@savefiletool.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
     });
   </script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ContactPage",
-      "name": "Contact SaveEditor.top",
-      "url": "https://saveeditor.top/contact",
-      "description": "Contact page for SaveEditor.top customer support."
+      "name": "Contact SaveFileTool",
+      "url": "https://savefiletool.com/contact",
+      "description": "Contact page for SaveFileTool customer support."
     }
   </script>
 </BaseLayout>

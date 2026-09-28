@@ -1,0 +1,45 @@
+---
+import HomeTemplate from '../../components/templates/HomeTemplate.astro';
+---
+
+<HomeTemplate
+  lang="ja"
+  title="無料オンライン セーブエディタ - RPGツクール(.rpgsave), Ren'Py, Unity 改造ツール"
+  description="無料オンラインセーブエディタ。RPGツクール(.rpgsave)、Ren'Py(.save)、Unity、Unrealのセーブデータをブラウザで編集。Unreal .sav は互換性優先（標準GVASを優先、独自コンテナ/圧縮は読み取り専用の場合あり）。"
+  keywords="セーブエディタ, セーブデータ改造, RPGツクール 改造, rmmzsave 変換, renpy セーブ編集, save editor, オンラインツール"
+>
+  <div slot="seo-content" class="max-w-4xl mx-auto prose prose-blue prose-lg text-gray-600 mb-16">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+      ブラウザで使えるオンラインセーブファイルエディタ
+    </h2>
+    <p>
+      <strong>SaveFileTool</strong
+      >へようこそ。互換性のあるゲームセーブファイルを編集するための無料オンラインツールです。RPGツクールゲームでゴールドを調整したい、Ren'Pyビジュアルノベルで表示可能な persistent 項目を確認したい、Unityゲームでステータスを変更したい場合に、ブラウザから作業できます。
+    </p>
+    <div class="grid md:grid-cols-2 gap-8 my-8 not-prose">
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Webベースエディタを使う理由</h3>
+        <ul class="text-sm space-y-2 list-disc list-inside">
+          <li>怪しい.exeファイルのダウンロード不要</li>
+          <li>Mac、Windows、Linux、Androidで動作</li>
+          <li>常に最新バージョン</li>
+          <li>ブラウザ内でファイルを解析し、編集前のバックアップを推奨</li>
+        </ul>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+        <h3 class="text-lg font-bold text-gray-900 mb-2">対応フォーマット</h3>
+        <ul class="text-sm space-y-2 list-disc list-inside">
+          <li><strong>RPGツクール</strong>: .rpgsave, .rmmzsave</li>
+          <li><strong>Ren'Py</strong>: .save (Python pickle)</li>
+          <li><strong>Unity</strong>: PlayerPrefs, .xml, .plist</li>
+          <li><strong>汎用</strong>: .json, .ini, .txt</li>
+        </ul>
+      </div>
+    </div>
+    <p>
+      有害なソフトウェアのダウンロードを避けたい場合、<strong
+        >SaveFileTool</strong
+      >はWebブラウザ内で互換セーブファイルを解析するメイン編集フローを提供します。サイトの改善と広告表示のため、Google Analytics と AdSense を使用しています。詳細はプライバシー/クッキーポリシーをご覧ください。
+    </p>
+  </div>
+</HomeTemplate>

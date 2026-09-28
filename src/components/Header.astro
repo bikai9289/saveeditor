@@ -133,16 +133,10 @@ const getBlogUrl = (targetLang: string): string => {
         </div>
       </div>
       <a
-        href={localizePath('/games', lang)}
-        aria-current={isCurrentPath('/games/') ? 'page' : undefined}
+        href={localizePath('/faq', lang)}
+        aria-current={isCurrentPath('/faq/') ? 'page' : undefined}
         class="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors dark:text-gray-300"
-        >{t('nav.games')}</a
-      >
-      <a
-        href={localizePath('/blog', lang)}
-        aria-current={isCurrentPath('/blog/') ? 'page' : undefined}
-        class="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors dark:text-gray-300"
-        >{t('nav.blog')}</a
+        >FAQ</a
       >
       <a
         href={localizePath('/saves', lang)}
@@ -315,16 +309,10 @@ const getBlogUrl = (targetLang: string): string => {
       </div>
 
       <a
-        href={localizePath('/games', lang)}
-        aria-current={isCurrentPath('/games/') ? 'page' : undefined}
+        href={localizePath('/faq', lang)}
+        aria-current={isCurrentPath('/faq/') ? 'page' : undefined}
         class="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 rounded-lg dark:text-gray-300 dark:hover:bg-gray-800"
-        >{t('nav.games')}</a
-      >
-      <a
-        href={localizePath('/blog', lang)}
-        aria-current={isCurrentPath('/blog/') ? 'page' : undefined}
-        class="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 rounded-lg dark:text-gray-300 dark:hover:bg-gray-800"
-        >{t('nav.blog')}</a
+        >FAQ</a
       >
       <a
         href={localizePath('/saves', lang)}

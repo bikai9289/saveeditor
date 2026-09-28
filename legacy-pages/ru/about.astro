@@ -1,0 +1,291 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="О нас | SaveFileTool"
+  description="Познакомьтесь с командой разработчиков и философией SaveFileTool: браузерный редактор для совместимых локальных файлов сохранений с понятными ограничениями."
+>
+  <section class="container mx-auto px-4 py-12 max-w-6xl">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+        О проекте SaveFileTool
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        Это независимая инициатива с открытым исходным кодом (Open Source), созданная для совместимых локальных сохранений, понятных ограничений и осторожного сценария редактирования с резервной копией.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <div
+        class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center"
+      >
+        <div class="text-4xl font-bold text-primary-600 mb-2">Browser</div>
+        <div class="text-gray-600 dark:text-gray-400 font-medium">Основной сценарий</div>
+      </div>
+      <div
+        class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center"
+      >
+        <div class="text-4xl font-bold text-primary-600 mb-2">50+</div>
+        <div class="text-gray-600 dark:text-gray-400 font-medium">Поддерживаемых форматов</div>
+      </div>
+      <div
+        class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center"
+      >
+        <div class="text-4xl font-bold text-primary-600 mb-2">Открыто</div>
+        <div class="text-gray-600 dark:text-gray-400 font-medium">Свободно и навсегда</div>
+      </div>
+    </div>
+
+    <div class="prose prose-lg prose-blue max-w-none dark:prose-invert">
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-6">Наша главная миссия</h2>
+        <p class="text-lg leading-relaxed">
+          Проект SaveFileTool был задуман и создан с одной очень простой, но амбициозной целью: <strong
+            >демократизация и всеобщая доступность модификации игровых данных</strong
+          >. Мы твердо убеждены, что одиночные игры (Single-Player) — это сугубо личный опыт. Желаете ли вы пропустить утомительный фарм (гринд), спасти случайно поврежденный файл сохранения (corrupted save), восстановить утраченный прогресс или просто из любопытства посмотреть другие развилки сюжета — безопасный и простой инструмент для этого всегда должен быть под рукой.
+        </p>
+        <p class="leading-relaxed mt-4">
+          Раньше для самостоятельного редактирования данных приходилось скачивать сомнительные программы, править шестнадцатеричный код или иметь технические навыки. Мы снизили этот порог, создав инструмент, который работает прямо в браузере для совместимых файлов. Перед заменой оригинального сохранения все равно нужна резервная копия.
+        </p>
+      </section>
+
+      <section class="mb-16 bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 md:p-12">
+        <h2 class="text-3xl font-bold mb-6">Почему нам можно доверять? Основы нашей надежности</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-3">🔒 Безопасные вычисления на стороне клиента (Client-Side)</h3>
+            <p class="text-gray-700 dark:text-gray-300">
+              Основной сценарий редактирования построен вокруг обработки в браузере: выбранный файл загружается в память браузера, редактируется и сохраняется обратно на диск. На сайте используются Google Analytics и Google AdSense для аналитики и рекламы. Полная информация доступна в разделе «Политика конфиденциальности и использования Cookie».
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-3">🛡️ Прозрачность и этические стандарты</h3>
+            <p class="text-gray-700 dark:text-gray-300">
+              Мы придерживаемся принципов абсолютной технической прозрачности. Платформа основана исключительно на современных веб-стандартах, таких как органичный HTML5 и WebAssembly, без использования скрытых скриптов. Мы категорически отвергаем и осуждаем любые попытки вмешательства в соревновательные, многопользовательские (онлайн) режимы игр с целью получения нечестного преимущества (так называемые «читы» и хакерские программы для онлайна). Наша архитектура целенаправленно и изначально проектировалась исключительно для работы в изолированной одиночной (Single-Player) среде. Весь функционал платформы создан для того, чтобы игроки-одиночки получали больше удовольствия от любимых проектов без вреда для других.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-6">Поддерживаемые игровые движки и форматы файлов</h2>
+        <p class="mb-6">
+          Мы непрерывно, из месяца в месяц, расширяем список форматов файлов и архитектур игровых движков, которые умеет анализировать наша система. Вот основные из них на данный момент:
+        </p>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div
+            class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+          >
+            <span class="text-2xl">🎮</span>
+            <div>
+              <div class="font-bold">RPG Maker</div>
+              <div class="text-sm text-gray-500">.rpgsave (MV/MZ)</div>
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+          >
+            <span class="text-2xl">🎲</span>
+            <div>
+              <div class="font-bold">Unity</div>
+              <div class="text-sm text-gray-500">PlayerPrefs, Форматы JSON/XML</div>
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+          >
+            <span class="text-2xl">⚡</span>
+            <div>
+              <div class="font-bold">Unreal Engine</div>
+              <div class="text-sm text-gray-500">Файлы .sav (Стандарт GVAS)</div>
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+          >
+            <span class="text-2xl">🎭</span>
+            <div>
+              <div class="font-bold">Визуальные Новеллы Ren'Py</div>
+              <div class="text-sm text-gray-500">Файлы .save и .persistent (Просмотр)</div>
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+          >
+            <span class="text-2xl">👾</span>
+            <div>
+              <div class="font-bold">Движок GameMaker</div>
+              <div class="text-sm text-gray-500">Файлы конфигураций .ini и .json</div>
+            </div>
+          </div>
+          <div
+            class="flex items-center gap-3 p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+          >
+            <span class="text-2xl">📝</span>
+            <div>
+              <div class="font-bold">Среда NaniNovel</div>
+              <div class="text-sm text-gray-500">Форматы словарей .nson</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-6">Часто задаваемые вопросы о проекте (FAQ)</h2>
+        <div class="space-y-4">
+          <details
+            class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer"
+          >
+            <summary class="font-bold text-lg flex justify-between items-center list-none">
+              <span>Правда ли, что все функции сайта абсолютно бесплатны и без подводных камней?</span>
+              <span class="transition group-open:rotate-180">
+                <svg
+                  fill="none"
+                  height="24"
+                  shape-rendering="geometricPrecision"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  width="24"><path d="M6 9l6 6 6-6"></path></svg
+                >
+              </span>
+            </summary>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">
+              Да. Проект можно использовать бесплатно в рамках текущих лимитов, включая ограничение размера файла. Стабильность работы поддерживается рекламой Google AdSense и добровольными пожертвованиями.
+            </p>
+          </details>
+          <details
+            class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer"
+          >
+            <summary class="font-bold text-lg flex justify-between items-center list-none">
+              <span>Находятся ли мои конфиденциальные файлы в безопасности при загрузке на сайт?</span>
+              <span class="transition group-open:rotate-180">
+                <svg
+                  fill="none"
+                  height="24"
+                  shape-rendering="geometricPrecision"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  width="24"><path d="M6 9l6 6 6-6"></path></svg
+                >
+              </span>
+            </summary>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">
+              Основной сценарий редактирования выполняется в браузере: файл загружается в память браузера, обрабатывается и сохраняется обратно на диск. Сайт также использует аналитику и рекламу, поэтому детали обработки данных указаны в Политике конфиденциальности.
+            </p>
+          </details>
+          <details
+            class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer"
+          >
+            <summary class="font-bold text-lg flex justify-between items-center list-none">
+              <span>Могут ли меня забанить (заблокировать аккаунт) в цифровых магазинах (Steam, Epic Store, GOG) за использование этого редактора, например, из-за системы V.A.C (Valve Anti-Cheat)?</span>
+              <span class="transition group-open:rotate-180">
+                <svg
+                  fill="none"
+                  height="24"
+                  shape-rendering="geometricPrecision"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  width="24"><path d="M6 9l6 6 6-6"></path></svg
+                >
+              </span>
+            </summary>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">
+              Для локальных одиночных сохранений риск обычно ниже, но правила зависят от игры и платформы. Не используйте редактор для онлайн, соревновательных или серверных режимов: это может нарушить правила игры или платформы.
+            </p>
+          </details>
+          <details
+            class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer"
+          >
+            <summary class="font-bold text-lg flex justify-between items-center list-none">
+              <span>Рассматриваете ли вы возможность добавить поддержку редкой/слабоизвестной игры или уникального формата «под заказ», который мне очень нужен?</span>
+              <span class="transition group-open:rotate-180">
+                <svg
+                  fill="none"
+                  height="24"
+                  shape-rendering="geometricPrecision"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  width="24"><path d="M6 9l6 6 6-6"></path></svg
+                >
+              </span>
+            </summary>
+            <p class="mt-4 text-gray-600 dark:text-gray-300">
+              С огромным удовольствием и энтузиазмом! Мы всегда открыты для новых идей. Пожалуйста, оперативно напишите нам через форму обратной связи («Связаться с нами») ваши предложения или прикрепите образцы необычных форматов. Мы обязательно проанализируем их техническую реалистичность и добавим в общую очередь разработки, ориентируясь на количество запросов от пользователей нашего сообщества.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SaveFileTool",
+      "url": "https://savefiletool.com",
+      "logo": "https://savefiletool.com/favicon.svg",
+      "sameAs": ["https://github.com/paradoxie/saveeditor"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@savefiletool.com",
+        "contactType": "customer support"
+      },
+      "foundingDate": "2024",
+      "slogan": "Предоставляем геймерам свободу играть и наслаждаться своими мирами на их собственных условиях."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Правда ли, что все функции сайта абсолютно бесплатны и без подводных камней?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Проект можно использовать бесплатно в рамках текущих лимитов, включая ограничение размера файла. Стабильность работы поддерживается рекламой Google AdSense и добровольными пожертвованиями."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Находятся ли мои конфиденциальные файлы в безопасности при загрузке на сайт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Основной сценарий редактирования выполняется в браузере: файл загружается в память браузера, обрабатывается и сохраняется обратно на диск. Сайт также использует аналитику и рекламу, поэтому детали обработки данных указаны в Политике конфиденциальности."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Могут ли меня забанить (заблокировать аккаунт) в цифровых магазинах (Steam, Epic Store, GOG) за использование этого редактора, например, из-за системы V.A.C (Valve Anti-Cheat)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для локальных одиночных сохранений риск обычно ниже, но правила зависят от игры и платформы. Не используйте редактор для онлайн, соревновательных или серверных режимов: это может нарушить правила игры или платформы."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Рассматриваете ли вы возможность добавить поддержку редкой/слабоизвестной игры или уникального формата «под заказ», который мне очень нужен?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "С огромным удовольствием и энтузиазмом! Мы всегда открыты для новых идей. Пожалуйста, оперативно напишите нам через форму обратной связи («Связаться с нами») ваши предложения или прикрепите образцы необычных форматов. Мы обязательно проанализируем их техническую реалистичность и добавим в общую очередь разработки, ориентируясь на количество запросов от пользователей нашего сообщества."
+          }
+        }
+      ]
+    }
+  ]
+</script>
