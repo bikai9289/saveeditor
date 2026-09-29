@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getLangFromUrl } from '../i18n/utils';
-import { SITE_LOCALES, getCanonicalPath, getSiteOrigin, localizedUrl } from '../lib/site';
+import { getCanonicalPath, getSiteOrigin } from '../lib/site';
 
 interface Props {
   title: string;
@@ -17,7 +17,7 @@ const lang = getLangFromUrl(Astro.url);
 const siteOrigin = getSiteOrigin(Astro.site);
 const canonicalURL = new URL(getCanonicalPath(Astro.url.pathname), siteOrigin);
 const siteUrl = `${siteOrigin}/`;
-const defaultOgImage = new URL('/images/blog/rpg-maker-cover.webp', siteUrl).toString();
+const defaultOgImage = new URL('/images/games/rpg-maker.webp', siteUrl).toString();
 const ogImageUrl = new URL(ogImage || defaultOgImage, siteUrl).toString();
 const structuredData = [
   {
@@ -49,7 +49,7 @@ const structuredData = [
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self';
-                   script-src 'self' 'unsafe-inline' 'unsafe-eval';
+                   script-src 'self' 'unsafe-inline';
                    frame-src 'self';
                    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
                    font-src 'self' https://fonts.gstatic.com;
@@ -71,13 +71,6 @@ const structuredData = [
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonicalURL} />
-    {
-      SITE_LOCALES.map((locale) => (
-        <link rel="alternate" hreflang={locale} href={localizedUrl(Astro.url.pathname, locale, siteOrigin)} />
-      ))
-    }
-    <link rel="alternate" hreflang="x-default" href={localizedUrl(Astro.url.pathname, 'en', siteOrigin)} />
-
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

@@ -45,22 +45,7 @@ export const GENERIC_SAVE_EXTENSIONS = [
 ];
 
 export const SMART_UPLOAD_EXTENSIONS = [
-    'rpgsave',
     'rmmzsave',
-    'rvdata2',
-    'rvdata',
-    'rxdata',
-    'lsd',
-    'sav',
-    'save',
-    'xml',
-    'plist',
-    'prefs',
-    'ini',
-    'json',
-    'txt',
-    'nson',
-    ...GENERIC_SAVE_EXTENSIONS,
 ];
 
 export const GENERIC_EXTENSION_SET = new Set(GENERIC_SAVE_EXTENSIONS);

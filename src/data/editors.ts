@@ -17,22 +17,20 @@ export const editors: EditorData[] = [
   {
     slug: 'rpg-maker-mv',
     name: 'RPG Maker MV/MZ',
-    fileType: '.rpgsave, .rmmzsave, .rvdata2, .rvdata, .rxdata, .lsd',
-    title: 'RPG Maker Save Editor - Free .rpgsave & .rmmzsave Editor',
+    fileType: '.rmmzsave',
+    title: 'RPG Maker MZ Save Editor - Free .rmmzsave Editor',
     description:
-      'Free RPG Maker save editor for .rpgsave, .rmmzsave, .rvdata2, .rvdata, .rxdata, and .lsd files. Edit compatible RPG Maker saves in your browser with no download.',
+      'Free RPG Maker MZ save editor for tested .rmmzsave files. Edit compatible saves in your browser with no download.',
     keywords:
-      'rpg maker save editor, rpgsave editor, rmmzsave editor, .rpgsave editor online, rpg maker mv save editor, rpg maker mz save editor, edit rpgsave file',
+      'rpg maker mz save editor, rmmzsave editor, .rmmzsave editor online, edit rmmzsave file',
     features: [
-      'Edit gold and money fields',
-      'Modify common actor stats such as level, EXP, HP, and MP',
-      'Adjust item, weapon, and armor quantities',
-      'Edit RPG Maker variables and switches carefully',
+      'Edit gold and money fields tested on a real .rmmzsave workflow',
+      'Review candidate actor, inventory, variable, and switch fields with backup-first warnings',
     ],
     instructions: [
-      'Locate your RPG Maker save file, usually in the game folder under `www/save/` or `save/`',
-      'Choose a `.rpgsave`, `.rmmzsave`, `.rvdata2`, `.rvdata`, `.rxdata`, or `.lsd` file',
-      'Edit common values such as gold, stats, items, variables, or switches',
+      'Locate your RPG Maker MZ save file, usually in the game folder under `save/`',
+      'Choose a `.rmmzsave` file',
+      'Edit tested gold values first; treat other detected fields as candidate fields until you verify them in game',
       'Download the rebuilt save and keep your original backup until you verify it in game',
     ],
   },

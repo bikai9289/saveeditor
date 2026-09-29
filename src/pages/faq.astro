@@ -36,7 +36,7 @@ const faqCategories = [
       {
         question: 'What file formats are supported?',
         answer:
-          'The public editor supports compatible RPG Maker .rpgsave, .rmmzsave, .rvdata2, .rvdata, .rxdata, and .lsd files.',
+          'The public editor currently accepts tested RPG Maker MZ .rmmzsave files. .rpgsave and older RPG Maker extensions will be added only after real-save verification.',
       },
       {
         question: 'Can I edit other game engines?',
@@ -62,7 +62,7 @@ const faqCategories = [
       {
         question: 'How do I know which file to choose?',
         answer:
-          'Choose the actual save slot file, such as file1.rpgsave or file1.rmmzsave. Do not select an executable, archive, or unrelated game asset.',
+          'Choose the actual RPG Maker MZ save slot file, such as file1.rmmzsave. Do not select an executable, archive, or unrelated game asset.',
       },
     ],
   },
@@ -73,12 +73,12 @@ const faqCategories = [
       {
         question: 'How do I edit gold or money?',
         answer:
-          'Choose a supported RPG Maker save, find the gold or money field, change it carefully, then download and test the new file.',
+          'Choose a tested .rmmzsave file, find the gold or money field, change it carefully, then download and test the new file.',
       },
       {
         question: 'Can I edit items, variables, and switches?',
         answer:
-          'Often yes for compatible RPG Maker saves, but exact meaning is game-specific. Make small changes and verify in game.',
+          'These fields are candidate fields. They may appear in decoded data, but exact meaning is game-specific, so make small changes and verify in game.',
       },
       {
         question: 'Will editing break my save?',
@@ -94,7 +94,7 @@ const faqCategories = [
       {
         question: "Why does the editor show 'Invalid file' or 'Parse error'?",
         answer:
-          'The file may not be a supported RPG Maker save, may be encrypted, or may use a custom structure.',
+          'The file may not be a tested .rmmzsave file, may be encrypted, or may use a custom structure.',
       },
       {
         question: "My game won't load the edited save. What now?",
@@ -115,8 +115,8 @@ const allQuestions = faqCategories.flatMap((cat) => cat.questions);
 
 <BaseLayout
   title="RPG Maker Save Editor FAQ | SaveFileTool"
-  description="Answers to common questions about using SaveFileTool for compatible RPG Maker save files."
-  keywords="rpg maker save editor faq, rpgsave editor help, rmmzsave editor help"
+  description="Answers to common questions about using SaveFileTool for tested RPG Maker MZ .rmmzsave files."
+  keywords="rpg maker mz save editor faq, rmmzsave editor help"
 >
   <section class="bg-slate-950 py-16 text-white">
     <div class="container mx-auto px-4 text-center">
@@ -124,7 +124,7 @@ const allQuestions = faqCategories.flatMap((cat) => cat.questions);
         RPG Maker Save Editor FAQ
       </h1>
       <p class="mx-auto max-w-2xl text-xl text-gray-300">
-        Scope, backups, file locations, and troubleshooting for compatible RPG Maker saves.
+        Scope, backups, file locations, and troubleshooting for tested RPG Maker MZ saves.
       </p>
     </div>
   </section>

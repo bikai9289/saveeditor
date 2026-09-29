@@ -2,7 +2,7 @@ import { localizePath, normalizeLang } from '../i18n/utils';
 import { SITE_ORIGIN } from './site';
 import { createUploadTicket, type UploadTicket } from './upload-vault';
 
-const RPG_MAKER_EXTENSIONS = new Set(['.rpgsave', '.rmmzsave', '.rvdata2', '.rvdata', '.rxdata', '.lsd']);
+const PUBLIC_RPG_MAKER_EXTENSIONS = new Set(['.rmmzsave']);
 
 function getExtension(fileName: string): string {
     const lastDot = fileName.lastIndexOf('.');
@@ -10,7 +10,7 @@ function getExtension(fileName: string): string {
 }
 
 export function isRpgMakerSaveFile(fileName: string): boolean {
-    return RPG_MAKER_EXTENSIONS.has(getExtension(fileName));
+    return PUBLIC_RPG_MAKER_EXTENSIONS.has(getExtension(fileName));
 }
 
 export function buildEditorUrl(token: string, locale?: string | null): string {
@@ -38,7 +38,7 @@ export async function beginEditorFlow(
     options: { locale?: string | null; source: string }
 ): Promise<{ ticket: UploadTicket; url: string }> {
     if (!isRpgMakerSaveFile(file.name)) {
-        throw new Error('This public editor currently supports RPG Maker save files only.');
+        throw new Error('This public editor currently accepts tested RPG Maker MZ .rmmzsave files only.');
     }
     const ticket = await createUploadTicket(file, options);
     return {

@@ -30,7 +30,7 @@ The current public scope is RPG Maker save editing only.
 | Default indexing domains | Changed script defaults from `https://saveeditor.top` to `https://savefiletool.com` | Done |
 | Local file handoff naming | Renamed IndexedDB store names and visible errors from upload vault language to local file handoff language; new URLs use `fileToken` while still reading old `uploadToken` links | Done |
 | Contact/support subjects | Changed support mail subjects from SaveEditor to SaveFileTool | Done |
-| License file | Added MIT `LICENSE` for the current repository declaration | Done |
+| License file | A MIT `LICENSE` was initially added, then removed in the follow-up cleanup because it could imply upstream authorization that has not been secured | Superseded |
 
 ## Upload/server check
 
@@ -50,5 +50,5 @@ public landing pages or active support claims.
 
 ## Follow-up notes
 
-The MIT license was added for this repository, but if any inherited upstream files were copied from
-a source with a different license, that provenance should still be checked before commercial use.
+The MIT license addition was superseded by the follow-up cleanup. Upstream authorization remains a
+release blocker unless inherited code is replaced or explicit permission is obtained.

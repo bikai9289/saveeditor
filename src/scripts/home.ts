@@ -1,6 +1,6 @@
 import { createUploadTicket } from '../lib/upload-vault';
 
-const RPG_MAKER_EXTENSIONS = new Set(['.rpgsave', '.rmmzsave', '.rvdata2', '.rvdata', '.rxdata', '.lsd']);
+const PUBLIC_RPG_MAKER_EXTENSIONS = new Set(['.rmmzsave']);
 
 function extensionOf(fileName: string): string {
     const index = fileName.lastIndexOf('.');
@@ -32,8 +32,8 @@ const initFileUpload = () => {
     };
 
     const handleFile = async (file: File) => {
-        if (!RPG_MAKER_EXTENSIONS.has(extensionOf(file.name))) {
-            alert('This public editor currently supports RPG Maker save files only: .rpgsave, .rmmzsave, .rvdata2, .rvdata, .rxdata, and .lsd.');
+        if (!PUBLIC_RPG_MAKER_EXTENSIONS.has(extensionOf(file.name))) {
+            alert('This public editor currently accepts tested RPG Maker MZ .rmmzsave files only.');
             return;
         }
 

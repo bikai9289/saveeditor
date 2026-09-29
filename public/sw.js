@@ -1,6 +1,5 @@
 const CACHE_NAME = 'savefiletool-static-v1';
 const STATIC_ASSETS = [
-  '/',
   '/favicon.svg',
   '/site.webmanifest',
   '/llms.txt'

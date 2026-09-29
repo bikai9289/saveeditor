@@ -36,7 +36,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                 setSupportPack(null);
                 setWarnings([]);
 
-                const maxFileSize = 50 * 1024 * 1024;
+                const maxFileSize = 10 * 1024 * 1024;
                 if (file.size > maxFileSize) {
                     const rejectedPack = await buildRejectedSupportPackFromFile({
                         file,
@@ -47,7 +47,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                     });
                     if (cancelled) return;
                     setSupportPack(rejectedPack);
-                    setError('File too large. Maximum file size is 50MB.');
+                    setError('File too large. Maximum file size is 10MB.');
                     setErrorAdvice(['Use the original RPG Maker save file directly from the game save folder.', 'If the file is inside an archive, extract it first and choose the save file itself.']);
                     setLoading(false);
                     return;
@@ -65,7 +65,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                     setData(null);
                     setError(outcome.reason || 'This public editor currently supports RPG Maker save files only.');
                     setErrorAdvice([
-                        'Supported formats: .rpgsave, .rmmzsave, .rvdata2, .rvdata, .rxdata, and .lsd.',
+                        'Current public entry: tested RPG Maker MZ .rmmzsave files.',
                         'Use a backup copy first. The editor runs locally in your browser and does not upload save contents to a server.',
                     ]);
                     setLoading(false);
@@ -260,10 +260,8 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
 }
 
 function formatLabel(format: string): string {
-    if (format === 'rpgmaker-ruby-marshal') return 'RPG Maker XP/VX/VX Ace';
-    if (format === 'rpgmaker-2000-2003-lsd') return 'RPG Maker 2000/2003';
     if (format === 'rpgmaker') return 'RPG Maker MV/MZ';
-    return 'RPG Maker save';
+    return 'RPG Maker candidate structure';
 }
 
 function downloadBlob(blob: Blob, filename: string) {

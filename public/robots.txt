@@ -4,8 +4,6 @@ Allow: /
 # Sitemaps
 Sitemap: https://savefiletool.com/sitemap-index.xml
 
-Disallow: /_astro/
-
 # AI crawlers
 User-agent: GPTBot
 Allow: /

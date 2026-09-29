@@ -6,7 +6,7 @@ const origin = (process.env.PUBLIC_SITE_ORIGIN || SITE_ORIGIN).replace(/\/+$/, '
 
 const llms = `# SaveFileTool
 
-> Browser-based RPG Maker save editor for compatible local save files.
+> Browser-based RPG Maker MZ save editor for tested local .rmmzsave files.
 
 For full documentation, see: ${origin}/llms-full.txt
 
@@ -24,16 +24,16 @@ For full documentation, see: ${origin}/llms-full.txt
 
 ## Published Editor Scope
 
-- RPG Maker MV/MZ: .rpgsave, .rmmzsave
-- RPG Maker XP/VX/VX Ace: .rvdata2, .rvdata, .rxdata limited common-field editing
-- RPG Maker 2000/2003: .lsd limited common-field editing
+- RPG Maker MZ: .rmmzsave
+
+Other RPG Maker extensions are candidates only and are not part of the public support promise until real-save verification is complete.
 
 SaveFileTool does not claim public editor support for other game engines on this build. Files are processed by the main editor in the browser.
 `;
 
 const llmsFull = `# SaveFileTool
 
-> Browser-based RPG Maker save editor for compatible local save files.
+> Browser-based RPG Maker MZ save editor for tested local .rmmzsave files.
 
 ## Site Identity
 
@@ -43,7 +43,7 @@ const llmsFull = `# SaveFileTool
 - **Category**: UtilitiesApplication
 - **Operating System**: Web Browser
 - **Pricing**: Free, no registration required
-- **File size limit**: 50 MB per file
+- **File size limit**: 10 MB per file
 
 ## Current Public Routes
 
@@ -63,15 +63,15 @@ const llmsFull = `# SaveFileTool
 
 | Scope | Extensions | Notes |
 | --- | --- | --- |
-| RPG Maker MV/MZ | .rpgsave, .rmmzsave | Browser-side edit and rebuild for compatible saves |
-| RPG Maker XP/VX/VX Ace | .rvdata2, .rvdata, .rxdata | Limited common-field editing |
-| RPG Maker 2000/2003 | .lsd | Limited common-field editing |
+| RPG Maker MZ | .rmmzsave | Browser-side edit and rebuild for tested saves |
 
 ## Evidence Status
 
-- **Sample records retained**: ${sampleRecords.length} RPG Maker fixture records
+- **Sample records retained**: ${sampleRecords.length} RPG Maker fixture records for candidate engineering checks
 - **Real sample count claimed**: 0
-- **Public scope**: RPG Maker save editing only
+- **Public scope**: tested RPG Maker MZ .rmmzsave entry only
+
+Other RPG Maker extensions are candidates only and are not part of the public support promise until real-save verification is complete.
 
 ## Safety Boundary
 

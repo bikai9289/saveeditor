@@ -70,16 +70,12 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
     const variables = root?.variables || root?._variables || data?.variables;
     const switches = root?.switches || root?._switches || data?.switches;
     const actors = root?.actors || root?._actors || data?.actors;
-    const isLcf200x = String(root?._format || data?._format || '').includes('2000/2003');
-    const lcfEditable = new Set<string>(Array.isArray(root?._lcf?.editable) ? root._lcf.editable : []);
-    const canEditGold = !isLcf200x || lcfEditable.has('gold');
-    const canEditItems = !isLcf200x || lcfEditable.has('items');
-    const canEditVariables = !isLcf200x || lcfEditable.has('variables');
-    const canEditSwitches = !isLcf200x || lcfEditable.has('switches');
-    const canEditActors = !isLcf200x || lcfEditable.has('actors');
-    const itemCatalog = isLcf200x
-        ? mergeNameMaps(folderContext.items, folderContext.weapons, folderContext.armors)
-        : folderContext.items;
+    const canEditGold = true;
+    const canEditItems = true;
+    const canEditVariables = true;
+    const canEditSwitches = true;
+    const canEditActors = true;
+    const itemCatalog = folderContext.items;
     const itemOptions = Object.entries(itemCatalog).slice(0, 250);
     const actorDataPath = resolveActorDataPath(root);
 
@@ -99,24 +95,8 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
         for (const file of files) {
             const name = file.name.toLowerCase();
             const path = ((file as any).webkitRelativePath || file.name).toLowerCase();
-            if (
-                !path.includes('/data/') &&
-                !name.match(/^(items|weapons|armors|actors|system|mapinfos)\.(json|rvdata2|rvdata|rxdata)$/) &&
-                name !== 'rpg_rt.ldb'
-            ) continue;
+            if (!path.includes('/data/') && !name.match(/^(items|weapons|armors|actors|system|mapinfos)\.json$/)) continue;
             try {
-                if (name === 'rpg_rt.ldb') {
-                    const { parseLcfDatabaseNames } = await import('../../lib/parsers/lcf');
-                    const maps = parseLcfDatabaseNames(new Uint8Array(await file.arrayBuffer()));
-                    next.items = { ...next.items, ...(maps.items || {}) };
-                    next.weapons = { ...next.weapons, ...(maps.weapons || {}) };
-                    next.armors = { ...next.armors, ...(maps.armors || {}) };
-                    next.actors = { ...next.actors, ...(maps.actors || {}) };
-                    next.variables = { ...next.variables, ...(maps.variables || {}) };
-                    next.switches = { ...next.switches, ...(maps.switches || {}) };
-                    continue;
-                }
-
                 const parsed = await readDatabaseFile(file);
                 if (name.startsWith('items.')) next.items = extractNameMap(parsed);
                 if (name.startsWith('weapons.')) next.weapons = extractNameMap(parsed);
@@ -141,7 +121,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <h4 className="text-base font-semibold text-gray-800">RPG Maker Folder Mode</h4>
-                        <p className="text-xs text-gray-500">Optional: choose the game folder to label item, actor, variable, and switch IDs locally, including RPG_RT.ldb for RPG Maker 2000/2003.</p>
+                        <p className="text-xs text-gray-500">Optional: choose the game folder to label candidate item, actor, variable, and switch IDs locally from RPG Maker MZ JSON data files.</p>
                     </div>
                     <label className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">
                         Open Game Folder
@@ -159,13 +139,19 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                 </p>
             </div>
 
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+                <strong>Evidence status:</strong> gold editing is the tested path for the current
+                .rmmzsave public entry. Actor, inventory, variable, and switch fields are candidate
+                fields; verify small changes in game before replacing your original save.
+            </div>
+
             {/* Gold Editor */}
             <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl p-5 border border-amber-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
                         <span className="text-xl">💰</span>
                     </div>
-                    <label className="text-base font-semibold text-gray-800">Gold / Money</label>
+                    <label className="text-base font-semibold text-gray-800">Gold / Money <span className="text-xs font-medium text-emerald-700">(tested)</span></label>
                 </div>
                 <input
                     type="number"
@@ -191,10 +177,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                             const actorName = folderContext.actors[actor._actorId] || actor._name || actor.name || `Actor #${actor._actorId}`;
                             const params = actor._paramPlus || [];
 
-                            // RPG Maker 2000/2003 stores actor modifiers differently from MV/MZ.
-                            const paramNames = isLcf200x
-                                ? ['HP Mod', 'MP Mod', 'Attack', 'Defense', 'Spirit', 'Unused', 'Agility', 'Unused']
-                                : ['MHP', 'MMP', 'ATK', 'DEF', 'MAT', 'MDF', 'AGI', 'LUK'];
+                            const paramNames = ['MHP', 'MMP', 'ATK', 'DEF', 'MAT', 'MDF', 'AGI', 'LUK'];
                             const actorId = actor._actorId;
                             const actorBasePath = actorDataPath ? [...actorDataPath, index] : null;
 
@@ -205,7 +188,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                                             <span className="text-lg font-bold text-primary-600">#{actorId}</span>
                                         </div>
                                         <h4 className="text-base font-semibold text-gray-800">
-                                            {actorName}
+                                            {actorName} <span className="text-xs font-medium text-amber-700">(candidate)</span>
                                         </h4>
                                     </div>
 
@@ -248,7 +231,6 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                                     {/* Base Parameters Grid */}
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                         {paramNames.map((paramName, paramIndex) => (
-                                            isLcf200x && paramName === 'Unused' ? null : (
                                             <div key={paramName} className="flex items-center gap-2">
                                                 <span className="text-xs font-medium text-gray-500 w-10">{paramName}</span>
                                                 <input
@@ -264,7 +246,6 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                                                     })}
                                                 />
                                             </div>
-                                            )
                                         ))}
                                     </div>
 
@@ -313,7 +294,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                             <span className="text-xl">📦</span>
                         </div>
                         <div>
-                            <h4 className="text-base font-semibold text-gray-800">Inventory (Items)</h4>
+                            <h4 className="text-base font-semibold text-gray-800">Inventory (Items) <span className="text-xs font-medium text-amber-700">(candidate)</span></h4>
                             <p className="text-xs text-gray-500">Format: {"{"}"itemId": quantity, ...{"}"}</p>
                         </div>
                     </div>
@@ -415,7 +396,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                             <span className="text-xl">🔧</span>
                         </div>
                         <div>
-                            <h4 className="text-base font-semibold text-gray-800">Variables</h4>
+                            <h4 className="text-base font-semibold text-gray-800">Variables <span className="text-xs font-medium text-amber-700">(candidate)</span></h4>
                             <p className="text-xs text-gray-500">Game variables for story progression, quests, etc.</p>
                         </div>
                     </div>
@@ -474,7 +455,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                             <span className="text-xl">🏚️</span>
                         </div>
                         <div>
-                            <h4 className="text-base font-semibold text-gray-800">Switches</h4>
+                            <h4 className="text-base font-semibold text-gray-800">Switches <span className="text-xs font-medium text-amber-700">(candidate)</span></h4>
                             <p className="text-xs text-gray-500">Boolean flags for game events. Shows only enabled switches.</p>
                         </div>
                     </div>
@@ -668,14 +649,8 @@ function extractMapNames(value: any): Record<string, string> {
     return result;
 }
 
-function mergeNameMaps(...maps: Array<Record<string, string>>): Record<string, string> {
-    return Object.assign({}, ...maps);
-}
-
 async function readDatabaseFile(file: File): Promise<any> {
-    if (file.name.toLowerCase().endsWith('.json')) return JSON.parse(await file.text());
-    const { parseRubyMarshal } = await import('../../lib/parsers/ruby-marshal');
-    return parseRubyMarshal(new Uint8Array(await file.arrayBuffer()));
+    return JSON.parse(await file.text());
 }
 
 function InventoryMapEditor({ title, values, names, readOnly, onChange }: {
@@ -691,7 +666,7 @@ function InventoryMapEditor({ title, values, names, readOnly, onChange }: {
 
     return (
         <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-5">
-            <h4 className="mb-3 text-base font-semibold text-gray-800">{title}</h4>
+            <h4 className="mb-3 text-base font-semibold text-gray-800">{title} <span className="text-xs font-medium text-amber-700">(candidate)</span></h4>
             <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_100px_auto_auto]">
                 {options.length > 0 ? (
                     <select className="rounded-lg border-gray-300 p-2.5" value={id} disabled={readOnly} onChange={(event) => setId(event.target.value)}>

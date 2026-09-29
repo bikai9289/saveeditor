@@ -1,14 +1,14 @@
 # SaveFileTool
 
-Browser-based RPG Maker save editing for compatible local save files.
+Browser-based RPG Maker MZ save editing for tested local `.rmmzsave` files.
 
-The public site is intentionally scoped to RPG Maker formats. It does not present itself as a universal save editor.
+The public site is intentionally scoped to a tested RPG Maker MZ `.rmmzsave` entry. It does not present itself as a universal save editor.
 
 ## Published Scope
 
-- RPG Maker MV/MZ: `.rpgsave`, `.rmmzsave`
-- RPG Maker XP/VX/VX Ace: `.rvdata2`, `.rvdata`, `.rxdata`
-- RPG Maker 2000/2003: `.lsd`
+- RPG Maker MZ: `.rmmzsave`
+
+Other RPG Maker extensions are not part of the public support promise until verified with real save files.
 
 Files are selected and processed in the browser. Always keep the original backup before replacing a save file in game.
 
