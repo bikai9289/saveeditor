@@ -1,11 +1,9 @@
-const CACHE_NAME = 'saveeditor-static-v1';
+const CACHE_NAME = 'savefiletool-static-v1';
 const STATIC_ASSETS = [
   '/',
   '/favicon.svg',
   '/site.webmanifest',
-  '/llms.txt',
-  '/sql-wasm-browser.js',
-  '/sql-wasm-browser.wasm'
+  '/llms.txt'
 ];
 
 self.addEventListener('install', (event) => {
@@ -31,7 +29,7 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
-  if (url.origin !== location.origin || url.pathname.startsWith('/api/')) return;
+  if (url.origin !== location.origin) return;
 
   if (url.pathname.startsWith('/_astro/') || STATIC_ASSETS.includes(url.pathname)) {
     event.respondWith(

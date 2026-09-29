@@ -167,7 +167,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const subject = formData.get('subject');
       const message = formData.get('message');
 
-      const mailSubject = `[SaveEditor Contact] ${subject?.toString().toUpperCase()}: ${name}`;
+      const mailSubject = `[SaveFileTool Contact] ${subject?.toString().toUpperCase()}: ${name}`;
       const mailBody = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
       window.location.href = `mailto:support@savefiletool.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;

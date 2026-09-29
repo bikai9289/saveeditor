@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FileUpload from './FileUpload';
 import LocalHistoryPanel from './LocalHistoryPanel';
-import SaveEditor from './SaveEditor';
+import RpgMakerEditorShell from './RpgMakerEditorShell';
 import { localizePath } from '../i18n/utils';
 import { readUploadToken } from '../lib/ingest';
 import { peekUploadFile } from '../lib/upload-vault';
@@ -228,7 +228,7 @@ export default function EditorApp({ acceptedFileTypes, editorSlug }: EditorAppPr
     }
 
     return (
-        <SaveEditor
+        <RpgMakerEditorShell
             file={file}
             onBack={() => {
                 setUploadToken(null);
@@ -243,7 +243,7 @@ export default function EditorApp({ acceptedFileTypes, editorSlug }: EditorAppPr
 async function buildSupportRequestMailto(_lang: string, file: File): Promise<string> {
     return supportPackMailto(await buildRejectedSupportPackFromFile({
         file,
-        parserPath: 'upload-gate',
+        parserPath: 'file-gate',
         failureStage: 'unsupported_extension',
         reasonCode: 'unsupported_extension',
         format: file.name.split('.').pop()?.toLowerCase() || 'unknown',

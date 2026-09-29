@@ -1,7 +1,7 @@
 {
-  "name": "SaveEditor.top",
-  "short_name": "SaveEditor.top",
-  "description": "Browser-side save editor for compatible local game saves.",
+  "name": "SaveFileTool",
+  "short_name": "SaveFileTool",
+  "description": "Browser-side RPG Maker save editor for compatible local save files.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

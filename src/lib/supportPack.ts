@@ -90,7 +90,7 @@ export async function readSupportHeaderBytes(file: Pick<File, 'slice'>): Promise
 }
 
 export function supportPackMailto(pack: SupportPackSummary, email = 'support@savefiletool.com'): string {
-    const subject = `SaveEditor support pack: ${pack.extension} ${pack.reasonCode}`;
+    const subject = `SaveFileTool support pack: ${pack.extension} ${pack.reasonCode}`;
     const body = [
         'Paste any game name/version notes above this line.',
         '',

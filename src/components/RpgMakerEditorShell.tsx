@@ -6,14 +6,14 @@ import RpgMakerEditor from './editors/RpgMakerEditor';
 import JsonEditor from './JsonEditor';
 import type { ParserCapability, SupportPackSummary } from '../lib/parsers/types';
 
-interface SaveEditorProps {
+interface RpgMakerEditorShellProps {
     file: File;
     onBack: () => void;
     editorSlug?: string;
     uploadToken?: string;
 }
 
-export default function SaveEditor({ file, onBack, editorSlug }: SaveEditorProps) {
+export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMakerEditorShellProps) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [errorAdvice, setErrorAdvice] = useState<string[]>([]);
@@ -48,7 +48,7 @@ export default function SaveEditor({ file, onBack, editorSlug }: SaveEditorProps
                     if (cancelled) return;
                     setSupportPack(rejectedPack);
                     setError('File too large. Maximum file size is 50MB.');
-                    setErrorAdvice(['Use the original RPG Maker save file directly from the game save folder.', 'If the file is inside an archive, extract it first and upload the save file itself.']);
+                    setErrorAdvice(['Use the original RPG Maker save file directly from the game save folder.', 'If the file is inside an archive, extract it first and choose the save file itself.']);
                     setLoading(false);
                     return;
                 }

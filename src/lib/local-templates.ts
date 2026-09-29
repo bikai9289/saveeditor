@@ -1,4 +1,4 @@
-const DB_NAME = 'saveeditor-local-templates';
+const DB_NAME = 'savefiletool-local-templates';
 const DB_VERSION = 1;
 const TEMPLATE_STORE = 'templates';
 const MAX_TEMPLATES = 20;

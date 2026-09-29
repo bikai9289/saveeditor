@@ -14,7 +14,7 @@ function editorPath(locale?: string | null): string {
 
 function appendUploadToken(path: string, token: string): string {
     const url = new URL(path, window.location.origin);
-    url.searchParams.set('uploadToken', token);
+    url.searchParams.set('fileToken', token);
     return `${url.pathname}${url.search}`;
 }
 

@@ -1,6 +1,6 @@
 import https from 'https';
 
-const origin = new URL(process.env.PUBLIC_SITE_ORIGIN || 'https://saveeditor.top');
+const origin = new URL(process.env.PUBLIC_SITE_ORIGIN || 'https://savefiletool.com');
 const host = origin.hostname;
 const base = origin.origin;
 const key = process.env.INDEXNOW_KEY;

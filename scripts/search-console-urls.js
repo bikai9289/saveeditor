@@ -1,4 +1,4 @@
-const host = (process.env.PUBLIC_SITE_ORIGIN || 'https://saveeditor.top').replace(/\/+$/, '');
+const host = (process.env.PUBLIC_SITE_ORIGIN || 'https://savefiletool.com').replace(/\/+$/, '');
 
 const urls = [
     '/',

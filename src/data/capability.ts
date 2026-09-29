@@ -149,11 +149,13 @@ export function getPreset(slug?: string): ResolvedPreset | undefined {
         .filter(Boolean) as SampleRecord[];
     const sampleFeatures = Array.from(new Set(samples.flatMap((sample) => sample.verifiedFeatures)));
     const evidenceScope = Array.from(new Set(samples.map((sample) => sample.evidenceScope)));
+    const realSampleCount = samples.filter((sample) => sample.sampleKind === 'real-anonymized').length;
+    const hasRealSample = realSampleCount > 0;
     return {
         ...presetItem,
-        confidence: 'verified',
-        verifiedFeatures: sampleFeatures,
-        candidateFeatures: [],
+        confidence: hasRealSample ? 'verified' : 'candidate',
+        verifiedFeatures: hasRealSample ? sampleFeatures : [],
+        candidateFeatures: hasRealSample ? [] : sampleFeatures,
         evidenceScope,
         samples,
     };
@@ -212,7 +214,7 @@ function field(
     icon: string,
     description: string
 ): PresetField {
-    return { id, label, group, pathSelector, valueType, writePolicy, aliases, confidence: 'verified', icon, description };
+    return { id, label, group, pathSelector, valueType, writePolicy, aliases, confidence: 'candidate', icon, description };
 }
 
 function preset(

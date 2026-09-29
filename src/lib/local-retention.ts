@@ -1,4 +1,4 @@
-const DB_NAME = 'saveeditor-local-retention';
+const DB_NAME = 'savefiletool-local-retention';
 const DB_VERSION = 1;
 const SETTINGS_STORE = 'settings';
 const HISTORY_STORE = 'history';

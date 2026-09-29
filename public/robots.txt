@@ -2,10 +2,8 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://saveeditor.top/sitemap-index.xml
+Sitemap: https://savefiletool.com/sitemap-index.xml
 
-# Disallow admin/API routes
-Disallow: /api/
 Disallow: /_astro/
 
 # AI crawlers

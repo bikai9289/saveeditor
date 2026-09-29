@@ -1,8 +1,8 @@
 import { normalizeLang, type SiteLang } from '../i18n/utils';
 
-const DB_NAME = 'saveeditor-online-upload-vault';
+const DB_NAME = 'savefiletool-local-file-handoff';
 const DB_VERSION = 1;
-const STORE_NAME = 'uploads';
+const STORE_NAME = 'files';
 const DEFAULT_TTL_MS = 1000 * 60 * 60;
 
 export interface UploadTicket {
@@ -28,7 +28,7 @@ function createToken(): string {
     if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
         return crypto.randomUUID();
     }
-    return `upload-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    return `file-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
 function openDatabase(): Promise<IDBDatabase> {
@@ -48,7 +48,7 @@ function openDatabase(): Promise<IDBDatabase> {
         };
 
         request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error || new Error('Failed to open upload vault.'));
+        request.onerror = () => reject(request.error || new Error('Failed to open local file handoff store.'));
     });
 }
 
@@ -74,11 +74,11 @@ async function withStore<T>(
         };
         transaction.onerror = () => {
             db.close();
-            settle(() => reject(transaction.error || new Error('Upload vault transaction failed.')));
+            settle(() => reject(transaction.error || new Error('Local file handoff transaction failed.')));
         };
         transaction.onabort = () => {
             db.close();
-            settle(() => reject(transaction.error || new Error('Upload vault transaction aborted.')));
+            settle(() => reject(transaction.error || new Error('Local file handoff transaction aborted.')));
         };
 
         Promise.resolve(run(store))
@@ -126,7 +126,7 @@ export async function pruneUploadVault(maxAgeMs = DEFAULT_TTL_MS): Promise<numbe
             const cursorRequest = index.openCursor(range);
 
             cursorRequest.onerror = () =>
-                reject(cursorRequest.error || new Error('Failed to prune upload vault.'));
+                reject(cursorRequest.error || new Error('Failed to prune local file handoff store.'));
 
             cursorRequest.onsuccess = () => {
                 const cursor = cursorRequest.result;

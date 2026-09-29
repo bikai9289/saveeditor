@@ -50,13 +50,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <section class="mb-16 rounded-2xl bg-gray-50 p-8 dark:bg-gray-800 md:p-12">
         <h2>Privacy Model</h2>
         <p>
-          The main editor reads and rebuilds selected files in the browser. The old recovery page
-          and server parse API have been removed so the product message stays aligned with the
-          local-processing workflow.
+          The main editor reads and rebuilds selected files in the browser. Files selected on the
+          home page are handed to the editor through browser storage, so the product message stays
+          aligned with the local-processing workflow.
         </p>
         <p>
-          We use Google Analytics and AdSense for site performance and ads; see the Privacy and
-          Cookie policies for details.
+          The current public build does not ship third-party analytics or advertising scripts.
+          Optional local history and templates stay in browser storage you control.
         </p>
       </section>
 

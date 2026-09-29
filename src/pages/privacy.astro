@@ -4,203 +4,110 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Privacy Policy | SaveFileTool"
-  description="Read our Privacy Policy to understand browser-side save parsing, analytics, ads, and data handling at SaveFileTool."
+  description="Read how SaveFileTool handles local RPG Maker save files, browser storage, and support messages."
 >
   <section class="container mx-auto px-4 py-12 max-w-4xl">
     <h1 class="text-4xl font-bold mb-8 text-gray-900 dark:text-white">Privacy Policy</h1>
     <div class="prose prose-blue max-w-none dark:prose-invert">
       <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-        <strong>Last Updated:</strong> January 30, 2026
+        <strong>Last Updated:</strong> September 29, 2026
       </p>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">1. Introduction</h2>
+        <h2 class="text-2xl font-bold mb-4">1. Overview</h2>
         <p>
-          Welcome to SaveFileTool ("we," "our," or "us"). We are committed to protecting your
-          privacy and explaining how our website handles data. This Privacy Policy
-          explains how we collect, use, and safeguard your information when you visit our website.
+          SaveFileTool is a browser-side RPG Maker save editor. The current public build does not
+          ship third-party analytics scripts, advertising scripts, or server-side save parsing.
         </p>
         <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 my-6">
           <p class="font-bold text-blue-800 dark:text-blue-200">Key Takeaway:</p>
           <p class="text-blue-700 dark:text-blue-300">
-            The main editor is designed around browser-side parsing for compatible files.
-            Analytics, ads, and abuse prevention are described below.
+            Selected save files are read in your browser. Optional history and templates are stored
+            in your browser's IndexedDB only when you enable or save them.
           </p>
         </div>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">2. Information We Collect</h2>
-
-        <h3 class="text-xl font-semibold mb-2">2.1 Information You Provide</h3>
+        <h2 class="text-2xl font-bold mb-4">2. Information You Provide</h2>
         <ul class="list-disc pl-6 mb-4">
           <li>
-            <strong>Game Save Files:</strong> When you use our editor, you select files from your device.
-            These files are loaded into your browser's memory in the main editing flow.
+            <strong>Save files:</strong> Files you choose are loaded by the browser for editing.
+            They are not sent to a SaveFileTool server by the editor flow.
           </li>
           <li>
-            <strong>Optional Local History:</strong> If you explicitly enable local edit history, recent
-            original and edited save files are stored only in your browser's IndexedDB. They are not
-            uploaded to our servers, and you can turn off and clear this history from the editor.
+            <strong>Optional local history:</strong> If enabled, original and edited files are kept
+            in your browser's IndexedDB for faster repeat edits. You can disable and clear this
+            history from the editor.
           </li>
           <li>
-            <strong>Optional Edit Templates:</strong> If you save an edit template, the selected editable
-            values are stored in your browser's IndexedDB for reuse on the same editor.
+            <strong>Optional local templates:</strong> Saved edit templates are stored in your
+            browser's IndexedDB for reuse on the same device.
           </li>
           <li>
-            <strong>Communication:</strong> If you contact us via email or our contact form, we collect
-            your email address and the content of your message to respond to your inquiry.
-          </li>
-        </ul>
-
-        <h3 class="text-xl font-semibold mb-2">2.2 Information Collected Automatically</h3>
-        <p>
-          When you visit our website, we and our third-party partners may collect certain
-          information automatically, including:
-        </p>
-        <ul class="list-disc pl-6 mb-4">
-          <li>
-            <strong>Log Data:</strong> IP address, browser type, operating system, referring/exit pages,
-            and timestamps.
-          </li>
-          <li>
-            <strong>Usage Data:</strong> Pages visited, time spent on pages, and other interaction data.
-            We also record minimal first-party events, such as page views and completed downloads,
-            to analyze aggregate usage trends and improve website performance.
-          </li>
-          <li>
-            <strong>Cookies:</strong> Small text files stored on your device (see our Cookie Policy).
+            <strong>Support messages:</strong> If you email us, your email address and message are
+            used to respond to your request.
           </li>
         </ul>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">3. How We Use Your Information</h2>
-        <p>We use the collected information for the following purposes:</p>
+        <h2 class="text-2xl font-bold mb-4">3. Automatically Processed Data</h2>
+        <p>
+          Hosting and security providers may process standard request data, such as IP address,
+          browser type, requested URL, timestamp, and basic security signals. This is used to serve
+          the website and protect it from abuse.
+        </p>
+        <p>
+          The current public build does not include third-party analytics, advertising scripts,
+          cross-site ad cookies, or a first-party analytics beacon.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold mb-4">4. How We Use Information</h2>
         <ul class="list-disc pl-6">
           <li>To operate and maintain the website.</li>
-          <li>To improve user experience and website performance.</li>
-          <li>To provide optional local-only edit history when you enable it.</li>
-          <li>To provide optional local edit templates when you save them.</li>
-          <li>To analyze usage trends and traffic through Google Analytics and basic website usage logs.</li>
-          <li>To display personalized advertisements (via Google AdSense).</li>
-          <li>To protect against malicious activity and abuse.</li>
+          <li>To run the browser-side editor on files you choose.</li>
+          <li>To provide optional local history and templates.</li>
+          <li>To answer support requests you send by email.</li>
+          <li>To protect the site from malicious activity and abuse.</li>
         </ul>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">4. Third-Party Services</h2>
-        <p>We use trusted third-party services that may collect and process data:</p>
+        <h2 class="text-2xl font-bold mb-4">5. Your Choices</h2>
         <ul class="list-disc pl-6">
-          <li>
-            <strong>Google Analytics:</strong> For website traffic analysis. Google operates independently
-            and has its own privacy policy.
-          </li>
-          <li>
-            <strong>Google AdSense:</strong> For displaying advertisements. Google uses cookies to serve
-            ads based on your prior visits to our website or other websites.
-          </li>
-          <li><strong>Cloudflare:</strong> For content delivery, security, and DDoS protection.</li>
+          <li>You can use the editor without creating an account.</li>
+          <li>You can choose not to enable local history.</li>
+          <li>You can clear local history and templates from your browser storage.</li>
+          <li>You can contact us to delete support messages you previously sent.</li>
         </ul>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">5. Google AdSense and the DoubleClick DART Cookie</h2>
-        <p class="mb-4">
-          Google, as a third-party vendor, uses cookies to serve ads on our website. Google's use of
-          the DoubleClick DART cookie enables it and its partners to serve ads to our users based on
-          their visit to our site and other sites on the Internet.
-        </p>
-        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 my-6">
-          <p class="font-bold text-yellow-800 dark:text-yellow-200">How to Opt Out:</p>
-          <ul class="list-disc pl-6 mt-2 text-yellow-700 dark:text-yellow-300">
-            <li>
-              Visit <a
-                href="https://www.google.com/settings/ads"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline">Google Ads Settings</a
-              > to opt out of personalized advertising.
-            </li>
-            <li>
-              Visit <a
-                href="https://www.aboutads.info/choices/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline">Digital Advertising Alliance's opt-out page</a
-              >.
-            </li>
-            <li>
-              Visit <a
-                href="https://optout.networkadvertising.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline">Network Advertising Initiative opt-out page</a
-              >.
-            </li>
-          </ul>
-        </div>
+        <h2 class="text-2xl font-bold mb-4">6. Children's Privacy</h2>
         <p>
-          For more information about how Google uses data when you use our site, please visit
-          <a
-            href="https://policies.google.com/technologies/partner-sites"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary-600 hover:underline"
-          >
-            How Google uses data when you use our partners' sites or apps
-          </a>.
+          The service is not directed to children under 13. We do not knowingly collect personal
+          information from children.
         </p>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">6. Your Rights (GDPR & CCPA)</h2>
-
-        <h3 class="text-xl font-semibold mb-2">6.1 GDPR (European Users)</h3>
-        <p>If you are located in the EEA, you have the right to:</p>
-        <ul class="list-disc pl-6 mb-4">
-          <li>Access, correct, or delete your personal data.</li>
-          <li>Object to processing or request restriction of processing.</li>
-          <li>Data portability.</li>
-          <li>Withdraw consent at any time.</li>
-        </ul>
-
-        <h3 class="text-xl font-semibold mb-2">6.2 CCPA (California Users)</h3>
-        <p>If you are a California resident, you have the right to:</p>
-        <ul class="list-disc pl-6 mb-4">
-          <li>Request disclosure of personal information collected.</li>
-          <li>Request deletion of your personal information.</li>
-          <li>
-            Opt-out of the sale of personal information (We do not sell your personal information).
-          </li>
-          <li>Non-discrimination for exercising your rights.</li>
-        </ul>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">7. Children's Privacy</h2>
+        <h2 class="text-2xl font-bold mb-4">7. Changes to This Policy</h2>
         <p>
-          Our service is not directed to children under the age of 13. We do not knowingly collect
-          personal information from children. If you are a parent or guardian and believe your child
-          has provided us with personal information, please contact us immediately.
+          We may update this Privacy Policy by posting a new version on this page and updating the
+          "Last Updated" date.
         </p>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">8. Changes to This Policy</h2>
+        <h2 class="text-2xl font-bold mb-4">8. Contact Us</h2>
         <p>
-          We may update this Privacy Policy from time to time. We will notify you of any changes by
-          posting the new Privacy Policy on this page and updating the "Last Updated" date.
-        </p>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">9. Contact Us</h2>
-        <p>
-          If you have any questions about this Privacy Policy, please contact us at:
+          Questions about privacy can be sent to
           <a href="mailto:privacy@savefiletool.com" class="text-primary-600 hover:underline"
             >privacy@savefiletool.com</a
-          >
+          >.
         </p>
       </section>
     </div>
@@ -211,8 +118,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       "@type": "WebPage",
       "name": "Privacy Policy",
       "url": "https://savefiletool.com/privacy",
-      "description": "Privacy Policy for SaveFileTool. Learn how we handle your data with our client-side technology.",
-      "lastReviewed": "2026-01-30",
+      "description": "Privacy Policy for SaveFileTool.",
+      "lastReviewed": "2026-09-29",
       "specialty": "LegalDocument"
     }
   </script>

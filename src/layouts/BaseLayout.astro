@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import CookieConsent from '../components/CookieConsent.astro';
 import { getLangFromUrl } from '../i18n/utils';
 import { SITE_LOCALES, getCanonicalPath, getSiteOrigin, localizedUrl } from '../lib/site';
 
@@ -47,98 +46,16 @@ const structuredData = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-adsense-account" content="ca-pub-1703945044985159" />
-
-    <!-- Security: Content Security Policy -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; 
-                   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; 
-                   frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com;
-                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
-                   font-src 'self' https://fonts.gstatic.com; 
-                   img-src 'self' data: https:; 
-                   connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com;"
+      content="default-src 'self';
+                   script-src 'self' 'unsafe-inline' 'unsafe-eval';
+                   frame-src 'self';
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self' data: https:;
+                   connect-src 'self';"
     />
-
-    <!-- Consent-gated Analytics/Ads -->
-    <script is:inline>
-      (function () {
-        const CONSENT_KEY = 'cookie-consent';
-        const CONSENT_ACCEPTED = 'accepted';
-        const GA_ID = 'G-K67NRPJ1VR';
-        const ADS_CLIENT = 'ca-pub-1703945044985159';
-
-        const ensureDataLayer = () => {
-          window.dataLayer = window.dataLayer || [];
-          if (!window.gtag) {
-            window.gtag = function () {
-              window.dataLayer.push(arguments);
-            };
-          }
-        };
-
-        const setDefaultConsent = () => {
-          ensureDataLayer();
-          window.gtag('consent', 'default', {
-            ad_storage: 'denied',
-            analytics_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-          });
-        };
-
-        const grantConsent = () => {
-          ensureDataLayer();
-          window.gtag('consent', 'update', {
-            ad_storage: 'granted',
-            analytics_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-          });
-        };
-
-        const loadGtag = () => {
-          if (window.__gaLoaded) return;
-          window.__gaLoaded = true;
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-          document.head.appendChild(script);
-          window.gtag('js', new Date());
-          window.gtag('config', GA_ID);
-        };
-
-        const loadAdSense = () => {
-          if (window.__adsLoaded) return;
-          window.__adsLoaded = true;
-          const script = document.createElement('script');
-          script.async = true;
-          script.src =
-            'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADS_CLIENT;
-          script.crossOrigin = 'anonymous';
-          document.head.appendChild(script);
-        };
-
-        const applyConsent = (value) => {
-          setDefaultConsent();
-          // Advanced Consent Mode: Load GA4 immediately with denied storage
-          // This allows "pings" for basic pageview counts without cookies
-          loadGtag();
-
-          if (value === CONSENT_ACCEPTED) {
-            grantConsent();
-            loadAdSense();
-          }
-        };
-
-        applyConsent(localStorage.getItem(CONSENT_KEY));
-
-        window.addEventListener('cookie-consent-changed', (event) => {
-          applyConsent(event?.detail || null);
-        });
-      })();
-    </script>
 
     <script is:inline>
       (function () {
@@ -150,27 +67,17 @@ const structuredData = [
       })();
     </script>
 
-    <!-- SEO Meta -->
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonicalURL} />
-
-    <!-- Hreflang Tags for all supported languages -->
     {
-      (() => {
-        return SITE_LOCALES.map((locale) => (
-          <link rel="alternate" hreflang={locale} href={localizedUrl(Astro.url.pathname, locale, siteOrigin)} />
-        ));
-      })()
+      SITE_LOCALES.map((locale) => (
+        <link rel="alternate" hreflang={locale} href={localizedUrl(Astro.url.pathname, locale, siteOrigin)} />
+      ))
     }
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={localizedUrl(Astro.url.pathname, 'en', siteOrigin)}
-    />
+    <link rel="alternate" hreflang="x-default" href={localizedUrl(Astro.url.pathname, 'en', siteOrigin)} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -178,55 +85,26 @@ const structuredData = [
     <meta property="og:site_name" content="SaveFileTool" />
     <meta property="og:image" content={ogImageUrl} />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@SaveEditorTop" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#2563eb" />
-
-    <!-- Performance: Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Performance: Font optimization with font-display -->
-    <style>
-      @font-face {
-        font-family: 'System';
-        font-display: swap;
-      }
-    </style>
-
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body
     class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200"
   >
-    <!-- Accessibility: Skip to main content -->
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-primary-600 focus:text-white focus:font-bold"
     >
-      {
-        lang === 'ja'
-          ? 'メインコンテンツへスキップ'
-          : lang === 'ko'
-            ? '본문으로 건너뛰기'
-            : lang === 'zh-cn'
-              ? '跳转到主要内容'
-              : lang === 'es'
-                ? 'Saltar al contenido principal'
-                : lang === 'ru'
-                  ? 'Перейти к основному содержанию'
-                  : lang === 'pt'
-                    ? 'Pular para o conteúdo principal'
-                    : 'Skip to main content'
-      }
+      Skip to main content
     </a>
 
     <Header />
@@ -234,6 +112,5 @@ const structuredData = [
       <slot />
     </main>
     <Footer />
-    <CookieConsent />
   </body>
 </html>

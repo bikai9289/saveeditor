@@ -17,19 +17,20 @@ export function buildEditorUrl(token: string, locale?: string | null): string {
     const lang = normalizeLang(locale);
     const base = localizePath('/editor/rpg-maker-mv', lang);
     const url = new URL(base, SITE_ORIGIN);
-    url.searchParams.set('uploadToken', token);
+    url.searchParams.set('fileToken', token);
     return `${url.pathname}${url.search}`;
 }
 
 export function appendUploadToken(route: string, token?: string | null): string {
     if (!token) return route;
     const url = new URL(route, SITE_ORIGIN);
-    url.searchParams.set('uploadToken', token);
+    url.searchParams.set('fileToken', token);
     return `${url.pathname}${url.search}`;
 }
 
 export function readUploadToken(search: string): string | null {
-    return new URLSearchParams(search).get('uploadToken');
+    const params = new URLSearchParams(search);
+    return params.get('fileToken') || params.get('uploadToken');
 }
 
 export async function beginEditorFlow(

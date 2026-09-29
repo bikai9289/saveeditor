@@ -4,81 +4,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Cookie Policy | SaveFileTool"
-  description="Understand how SaveFileTool uses cookies for analytics and advertising to keep our tool free. Manage your cookie preferences and learn about third-party services."
+  description="Understand the limited browser storage used by SaveFileTool."
 >
   <section class="container mx-auto px-4 py-12 max-w-4xl">
     <h1 class="text-4xl font-bold mb-8 text-gray-900 dark:text-white">Cookie Policy</h1>
     <div class="prose prose-blue max-w-none dark:prose-invert">
       <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-        <strong>Last Updated:</strong> January 30, 2026
+        <strong>Last Updated:</strong> September 29, 2026
       </p>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">1. What Are Cookies?</h2>
+        <h2 class="text-2xl font-bold mb-4">1. Current Cookie Use</h2>
         <p>
-          Cookies are small text files that are stored on your computer or mobile device when you
-          visit a website. They are widely used to make websites work more efficiently and to
-          provide information to the owners of the site.
+          The current public build does not set third-party analytics, advertising, or cross-site
+          ad cookies. It also does not include a first-party tracking beacon.
         </p>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">2. How We Use Cookies</h2>
-        <p>We use cookies for the following purposes:</p>
-
+        <h2 class="text-2xl font-bold mb-4">2. Browser Storage</h2>
+        <p>
+          SaveFileTool may use local browser storage for functionality you request, including theme
+          preference, optional local edit history, and optional edit templates.
+        </p>
         <div class="overflow-x-auto mt-6">
-          <table
-            class="min-w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
-          >
+          <table class="min-w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
             <thead>
               <tr class="bg-gray-50 dark:bg-gray-700">
-                <th class="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-200"
-                  >Category</th
-                >
-                <th class="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-200"
-                  >Purpose</th
-                >
-                <th class="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-200"
-                  >Examples</th
-                >
+                <th class="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-200">Storage</th>
+                <th class="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-200">Purpose</th>
+                <th class="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-200">Control</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
               <tr>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Essential</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  >Necessary for the website to function (e.g., language preferences).</td
-                >
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  ><code>lang</code>, <code>theme</code></td
-                >
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Theme preference</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Remember light or dark mode.</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Clear browser site data.</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Analytics</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  >To understand how visitors interact with our website.</td
-                >
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  ><code>_ga</code>, <code>_gid</code> (Google Analytics)</td
-                >
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Local file handoff</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Move a file from the home chooser to the editor inside the same browser.</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Expires automatically or can be cleared with browser site data.</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Advertising</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  >To display personalized advertisements based on browsing habits.</td
-                >
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  ><code>__gads</code>, <code>__gpi</code> (Google AdSense)</td
-                >
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Optional local history</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Keep browser-only copies for repeat edits after you enable it.</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Disable and clear from the editor.</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">DoubleClick (DART)</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  >Used by Google to serve ads based on your visits to this and other sites.</td
-                >
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"
-                  ><code>IDE</code>, <code>DSID</code>, <code>test_cookie</code></td
-                >
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Optional templates</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Save reusable field edits on this device.</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Delete templates in the editor or clear browser site data.</td>
               </tr>
             </tbody>
           </table>
@@ -86,77 +63,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">3. Managing Cookies</h2>
+        <h2 class="text-2xl font-bold mb-4">3. Managing Storage</h2>
         <p>
-          You can control and/or delete cookies as you wish. You can delete all cookies that are
-          already on your computer and you can set most browsers to prevent them from being placed.
-          If you do this, however, you may have to manually adjust some preferences every time you
-          visit a site and some services and functionalities may not work.
-        </p>
-        <p class="mt-4">
-          To learn more about how to manage cookies, visit <a
-            href="https://www.aboutcookies.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary-600 hover:underline">aboutcookies.org</a
-          >.
+          You can clear site data from your browser settings. Clearing site data removes local
+          history, templates, and preferences stored for SaveFileTool on that device.
         </p>
       </section>
 
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">4. Third-Party Cookies</h2>
+        <h2 class="text-2xl font-bold mb-4">4. Contact Us</h2>
         <p>
-          In addition to our own cookies, we may also use various third-parties cookies to report
-          usage statistics of the Service, deliver advertisements on and through the Service, and so
-          on.
-        </p>
-
-        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 my-6">
-          <p class="font-bold text-blue-800 dark:text-blue-200 mb-2">
-            Opting Out of Advertising Cookies:
-          </p>
-          <ul class="list-disc pl-6 text-blue-700 dark:text-blue-300 text-sm space-y-1">
-            <li>
-              <a
-                href="https://www.google.com/settings/ads"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline hover:no-underline"
-              >
-                Google Ads Settings
-              </a> - Opt out of Google personalized ads
-            </li>
-            <li>
-              <a
-                href="https://www.aboutads.info/choices/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline hover:no-underline"
-              >
-                Digital Advertising Alliance
-              </a> - Opt out of interest-based advertising
-            </li>
-            <li>
-              <a
-                href="https://optout.networkadvertising.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline hover:no-underline"
-              >
-                Network Advertising Initiative
-              </a> - Opt out of targeted advertising
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-4">5. Contact Us</h2>
-        <p>
-          If you have any questions about our Cookie Policy, please contact us at:
+          Questions about this policy can be sent to
           <a href="mailto:privacy@savefiletool.com" class="text-primary-600 hover:underline"
             >privacy@savefiletool.com</a
-          >
+          >.
         </p>
       </section>
     </div>
@@ -167,8 +87,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       "@type": "WebPage",
       "name": "Cookie Policy",
       "url": "https://savefiletool.com/cookie-policy",
-      "description": "Cookie Policy for SaveFileTool. Learn how we use cookies.",
-      "lastReviewed": "2026-01-30",
+      "description": "Cookie Policy for SaveFileTool.",
+      "lastReviewed": "2026-09-29",
       "specialty": "LegalDocument"
     }
   </script>
