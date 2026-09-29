@@ -260,7 +260,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
 }
 
 function formatLabel(format: string): string {
-    if (format === 'rpgmaker') return 'RPG Maker MV/MZ';
+    if (format === 'rpgmaker') return 'RPG Maker MZ';
     return 'RPG Maker candidate structure';
 }
 

@@ -72,12 +72,12 @@ export interface ResolvedPreset extends GamePreset {
 
 export const sampleRecords: SampleRecord[] = [
     {
-        id: 'fixture-rpgmaker-mv-core',
+        id: 'fixture-rpgmaker-mz-core',
         gameSlug: 'rpg-maker',
         engine: 'rpgmaker',
-        format: '.rpgsave/.rmmzsave',
+        format: '.rmmzsave',
         platform: 'synthetic',
-        gameVersion: 'MV/MZ fixture',
+        gameVersion: 'MZ fixture',
         sampleKind: 'synthetic-fixture',
         privacyLevel: 'public-fixture',
         evidenceScope: 'format-core',
@@ -86,40 +86,6 @@ export const sampleRecords: SampleRecord[] = [
         verifiedFeatures: ['Gold', 'Level', 'EXP', 'HP/MP', 'Items', 'Weapons', 'Armors', 'Variables', 'Switches'],
         reasonCode: 'ok',
         parserTestIds: ['test:parsers:fidelity', 'test:parsers:benchmark'],
-        verifiedAt: '2026-05-25',
-    },
-    {
-        id: 'fixture-rpgmaker-ruby-core',
-        gameSlug: 'rpg-maker',
-        engine: 'rpgmaker',
-        format: '.rvdata2/.rvdata/.rxdata',
-        platform: 'synthetic',
-        gameVersion: 'Ruby Marshal fixture',
-        sampleKind: 'synthetic-fixture',
-        privacyLevel: 'public-fixture',
-        evidenceScope: 'format-core',
-        appliesTo: ['rpg-maker'],
-        capability: 'stable-limited',
-        verifiedFeatures: ['Gold', 'Items', 'Weapons', 'Armors', 'Variables', 'Switches', 'Actor stats'],
-        reasonCode: 'ok',
-        parserTestIds: ['test:parsers:smoke', 'test:parsers:benchmark'],
-        verifiedAt: '2026-05-25',
-    },
-    {
-        id: 'fixture-rpgmaker-lcf-core',
-        gameSlug: 'rpg-maker',
-        engine: 'rpgmaker',
-        format: '.lsd',
-        platform: 'synthetic',
-        gameVersion: 'RPG Maker 2000/2003 fixture',
-        sampleKind: 'synthetic-fixture',
-        privacyLevel: 'public-fixture',
-        evidenceScope: 'format-core',
-        appliesTo: ['rpg-maker'],
-        capability: 'stable-limited',
-        verifiedFeatures: ['Gold', 'Items', 'Variables', 'Switches', 'Actor stats'],
-        reasonCode: 'ok',
-        parserTestIds: ['test:parsers:smoke', 'test:parsers:benchmark'],
         verifiedAt: '2026-05-25',
     },
 ];
@@ -137,7 +103,7 @@ const rpgMakerFields: PresetField[] = [
 ];
 
 export const gamePresets: GamePreset[] = [
-    preset('rpg-maker', 'rpgmaker', 'rpgmaker', rpgMakerFields, ['fixture-rpgmaker-mv-core', 'fixture-rpgmaker-ruby-core', 'fixture-rpgmaker-lcf-core'], ['Folder Mode improves item, actor, variable, and switch labels.']),
+    preset('rpg-maker', 'rpgmaker', 'rpgmaker', rpgMakerFields, ['fixture-rpgmaker-mz-core'], ['Folder Mode improves item, actor, variable, and switch labels.']),
 ];
 
 export function getPreset(slug?: string): ResolvedPreset | undefined {

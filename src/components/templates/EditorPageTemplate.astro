@@ -26,6 +26,8 @@ const siteOrigin = getSiteOrigin(Astro.site);
 const absUrl = (path: string) => absoluteUrl(path, siteOrigin);
 const homeHref = localizePath('/', lang);
 const editorHref = localizePath(`/editor/${engine.slug}`, lang);
+const homeUrl = absUrl(homeHref);
+const editorUrl = absUrl(editorHref);
 ---
 
 <BaseLayout title={engine.title} description={engine.description} keywords={engine.keywords}>
@@ -113,12 +115,33 @@ const editorHref = localizePath(`/editor/${engine.slug}`, lang);
         priceCurrency: 'USD',
       },
       featureList: engine.features,
-      url: absUrl(editorHref),
+      url: editorUrl,
       author: {
         '@type': 'Organization',
         name: 'SaveFileTool',
         url: absUrl('/'),
       },
+    })}
+  />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: homeUrl,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: `${engine.name} Save Editor`,
+          item: editorUrl,
+        },
+      ],
     })}
   />
 </BaseLayout>

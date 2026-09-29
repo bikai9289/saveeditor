@@ -9,7 +9,7 @@ function extensionOf(fileName: string): string {
 
 function editorPath(locale?: string | null): string {
     const lang = locale && locale !== 'en' ? `/${locale}` : '';
-    return `${lang}/editor/rpg-maker-mv/`;
+    return `${lang}/editor/rpg-maker-mz/`;
 }
 
 function appendUploadToken(path: string, token: string): string {

@@ -13,7 +13,7 @@ For full documentation, see: ${origin}/llms-full.txt
 ## Current Public Routes
 
 - /
-- /editor/rpg-maker-mv/
+- /editor/rpg-maker-mz/
 - /faq/
 - /support/
 - /about/
@@ -50,7 +50,7 @@ const llmsFull = `# SaveFileTool
 | Page | URL |
 | --- | --- |
 | Home | ${origin}/ |
-| RPG Maker Editor | ${origin}/editor/rpg-maker-mv/ |
+| RPG Maker Editor | ${origin}/editor/rpg-maker-mz/ |
 | FAQ | ${origin}/faq/ |
 | Support | ${origin}/support/ |
 | About | ${origin}/about/ |

@@ -12,7 +12,7 @@ const urlList = [
     `${base}/sitemap-index.xml`,
     `${base}/llms.txt`,
     `${base}/llms-full.txt`,
-    `${base}/editor/rpg-maker-mv`,
+    `${base}/editor/rpg-maker-mz`,
     `${base}/about`,
     `${base}/faq`,
     `${base}/support`,

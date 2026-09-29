@@ -17,7 +17,7 @@
 | Page | URL |
 | --- | --- |
 | Home | https://savefiletool.com/ |
-| RPG Maker Editor | https://savefiletool.com/editor/rpg-maker-mv/ |
+| RPG Maker Editor | https://savefiletool.com/editor/rpg-maker-mz/ |
 | FAQ | https://savefiletool.com/faq/ |
 | Support | https://savefiletool.com/support/ |
 | About | https://savefiletool.com/about/ |
@@ -34,7 +34,7 @@
 
 ## Evidence Status
 
-- **Sample records retained**: 3 RPG Maker fixture records for candidate engineering checks
+- **Sample records retained**: 1 RPG Maker fixture records for candidate engineering checks
 - **Real sample count claimed**: 0
 - **Public scope**: tested RPG Maker MZ .rmmzsave entry only
 

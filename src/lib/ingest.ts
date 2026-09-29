@@ -15,7 +15,7 @@ export function isRpgMakerSaveFile(fileName: string): boolean {
 
 export function buildEditorUrl(token: string, locale?: string | null): string {
     const lang = normalizeLang(locale);
-    const base = localizePath('/editor/rpg-maker-mv', lang);
+    const base = localizePath('/editor/rpg-maker-mz', lang);
     const url = new URL(base, SITE_ORIGIN);
     url.searchParams.set('fileToken', token);
     return `${url.pathname}${url.search}`;

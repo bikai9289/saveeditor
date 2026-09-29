@@ -15,8 +15,8 @@ export interface EditorData {
 
 export const editors: EditorData[] = [
   {
-    slug: 'rpg-maker-mv',
-    name: 'RPG Maker MV/MZ',
+    slug: 'rpg-maker-mz',
+    name: 'RPG Maker MZ',
     fileType: '.rmmzsave',
     title: 'RPG Maker MZ Save Editor - Free .rmmzsave Editor',
     description:
