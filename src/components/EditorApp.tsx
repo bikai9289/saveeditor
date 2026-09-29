@@ -1,0 +1,251 @@
+import React, { useState } from 'react';
+import FileUpload from './FileUpload';
+import LocalHistoryPanel from './LocalHistoryPanel';
+import SaveEditor from './SaveEditor';
+import { localizePath } from '../i18n/utils';
+import { readUploadToken } from '../lib/ingest';
+import { peekUploadFile } from '../lib/upload-vault';
+import { buildRejectedSupportPackFromFile, supportPackMailto } from '../lib/supportPack';
+
+interface EditorAppProps {
+    acceptedFileTypes?: string;
+    editorSlug?: string;
+}
+
+function extractExtensionToken(raw: string): string | null {
+    const match = raw.trim().toLowerCase().match(/\.[a-z0-9]+/);
+    return match ? match[0] : null;
+}
+
+export default function EditorApp({ acceptedFileTypes, editorSlug }: EditorAppProps) {
+    const [file, setFile] = useState<File | null>(null);
+    const [errorModalOpen, setErrorModalOpen] = useState(false);
+    const [unsupportedFile, setUnsupportedFile] = useState<File | null>(null);
+    const [unsupportedSupportHref, setUnsupportedSupportHref] = useState('mailto:support@savefiletool.com');
+    const [restoreError, setRestoreError] = useState<string | null>(null);
+    const currentLang =
+        typeof document !== 'undefined' ? document.documentElement.getAttribute('lang') || 'en' : 'en';
+    const [uploadToken, setUploadToken] = useState<string | null>(null);
+    const [isRestoringUpload, setIsRestoringUpload] = useState(() =>
+        typeof window !== 'undefined' ? Boolean(readUploadToken(window.location.search)) : false
+    );
+    const requestSupportMailto = unsupportedFile ? unsupportedSupportHref : 'mailto:support@savefiletool.com';
+    const homeHref = localizePath('/', currentLang);
+
+    const validateFile = (selectedFile: File): boolean => {
+        if (!acceptedFileTypes) {
+            return true;
+        }
+
+        const allowedExtensions = acceptedFileTypes
+            .split(',')
+            .map((ext) => extractExtensionToken(ext))
+            .filter((ext): ext is string => Boolean(ext));
+        const extensionPart = selectedFile.name.split('.').pop()?.toLowerCase();
+        const fileExtension = extensionPart ? `.${extensionPart}` : '';
+
+        if (fileExtension && allowedExtensions.includes(fileExtension)) {
+            return true;
+        } else {
+            setUnsupportedFile(selectedFile);
+            setErrorModalOpen(true);
+            return false;
+        }
+    };
+
+    const handleFileSelect = (selectedFile: File) => {
+        setRestoreError(null);
+        setUploadToken(null);
+        if (validateFile(selectedFile)) {
+            setFile(selectedFile);
+        }
+    };
+
+    React.useEffect(() => {
+        let cancelled = false;
+        if (!unsupportedFile) {
+            setUnsupportedSupportHref('mailto:support@savefiletool.com');
+            return;
+        }
+
+        buildSupportRequestMailto(currentLang, unsupportedFile).then((href) => {
+            if (!cancelled) setUnsupportedSupportHref(href);
+        });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [currentLang, unsupportedFile]);
+
+    React.useEffect(() => {
+        const nextUploadToken =
+            typeof window !== 'undefined' ? readUploadToken(window.location.search) : null;
+
+        if (!nextUploadToken) {
+            setUploadToken(null);
+            setIsRestoringUpload(false);
+            return;
+        }
+
+        let cancelled = false;
+
+        const restoreUpload = async () => {
+            try {
+                setIsRestoringUpload(true);
+                setRestoreError(null);
+                const restored = await peekUploadFile(nextUploadToken);
+
+                if (!restored) {
+                    throw new Error('The locally cached file is no longer available. Please choose it again.');
+                }
+
+                if (cancelled) return;
+
+                if (validateFile(restored.file)) {
+                    setFile(restored.file);
+                    setUploadToken(nextUploadToken);
+                } else {
+                    setUploadToken(null);
+                }
+            } catch (error: any) {
+                if (!cancelled) {
+                    setRestoreError(error?.message || 'Failed to restore the locally cached file.');
+                    setUploadToken(null);
+                }
+            } finally {
+                if (!cancelled) {
+                    setIsRestoringUpload(false);
+                }
+            }
+        };
+
+        restoreUpload();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [acceptedFileTypes]);
+
+    // Prevent browser from opening files when dropped outside the drop zone
+    React.useEffect(() => {
+        const handleDragOver = (e: DragEvent) => {
+            e.preventDefault();
+        };
+
+        const handleDrop = (e: DragEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+        };
+
+        window.addEventListener('dragover', handleDragOver);
+        window.addEventListener('drop', handleDrop);
+
+        return () => {
+            window.removeEventListener('dragover', handleDragOver);
+            window.removeEventListener('drop', handleDrop);
+        };
+    }, []);
+
+    if (!file) {
+        return (
+            <div className="space-y-8">
+                {isRestoringUpload && (
+                    <div className="rounded-xl border border-primary-100 bg-primary-50 p-6 text-center">
+                        <div className="animate-spin rounded-full h-10 w-10 border-4 border-primary-200 border-t-primary-600 mx-auto mb-4"></div>
+                        <p className="text-sm font-medium text-primary-800">Restoring your selected save locally...</p>
+                    </div>
+                )}
+
+                {restoreError && (
+                    <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 space-y-3">
+                        <p>{restoreError}</p>
+                        <a
+                            href={homeHref}
+                            className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-sm font-medium text-red-700 border border-red-200 hover:bg-red-100 transition-colors"
+                        >
+                            Back to home
+                        </a>
+                    </div>
+                )}
+
+                {!isRestoringUpload && <LocalHistoryPanel onFileSelect={handleFileSelect} />}
+
+                {/* No accept attribute - allow all files for manual validation */}
+                {!isRestoringUpload && <FileUpload onFileSelect={handleFileSelect} accept={acceptedFileTypes} />}
+
+                {/* Error Modal */}
+                {errorModalOpen && (
+                    <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onClick={() => setErrorModalOpen(false)}></div>
+                            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                                <div className="sm:flex sm:items-start">
+                                    <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                        <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg>
+                                    </div>
+                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                        <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                            File Type Not Supported
+                                        </h3>
+                                        <div className="mt-2">
+                                            <p className="text-sm text-gray-500">
+                                                You selected <strong>{unsupportedFile?.name}</strong>, but this editor currently only supports:
+                                            </p>
+                                            <p className="mt-2 text-sm font-mono bg-gray-100 p-2 rounded">
+                                                {acceptedFileTypes}
+                                            </p>
+                                            <p className="mt-4 text-sm text-gray-500">
+                                                Would you like to request support for this file type?
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                                    <a
+                                        href={requestSupportMailto}
+                                        className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                        onClick={() => setErrorModalOpen(false)}
+                                    >
+                                        Request Support via Email
+                                    </a>
+                                    <button
+                                        type="button"
+                                        className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:w-auto sm:text-sm"
+                                        onClick={() => setErrorModalOpen(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    return (
+        <SaveEditor
+            file={file}
+            onBack={() => {
+                setUploadToken(null);
+                setFile(null);
+            }}
+            editorSlug={editorSlug}
+            uploadToken={uploadToken || undefined}
+        />
+    );
+}
+
+async function buildSupportRequestMailto(_lang: string, file: File): Promise<string> {
+    return supportPackMailto(await buildRejectedSupportPackFromFile({
+        file,
+        parserPath: 'upload-gate',
+        failureStage: 'unsupported_extension',
+        reasonCode: 'unsupported_extension',
+        format: file.name.split('.').pop()?.toLowerCase() || 'unknown',
+    }));
+}

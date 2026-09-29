@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqIcon from '../components/FaqIcon.astro';
+
+const faqCategories = [
+  {
+    title: 'Getting Started',
+    icon: 'rocket',
+    questions: [
+      {
+        question: 'What is SaveFileTool?',
+        answer:
+          'SaveFileTool is a free, browser-based RPG Maker save editor for compatible local save files.',
+      },
+      {
+        question: 'Is this safe to use?',
+        answer:
+          'The main editor processes selected files in your browser. Always keep a backup before replacing a save file.',
+      },
+      {
+        question: 'Do I need to create an account?',
+        answer:
+          'No. SaveFileTool requires no registration or login.',
+      },
+      {
+        question: 'Is this really free?',
+        answer:
+          'Yes. The editor is free to use and supported by ads and optional support.',
+      },
+    ],
+  },
+  {
+    title: 'Supported Files',
+    icon: 'game',
+    questions: [
+      {
+        question: 'What file formats are supported?',
+        answer:
+          'The public editor supports compatible RPG Maker .rpgsave, .rmmzsave, .rvdata2, .rvdata, .rxdata, and .lsd files.',
+      },
+      {
+        question: 'Can I edit other game engines?',
+        answer:
+          'Not on this public build. If a format is not listed on the RPG Maker editor page, it is outside the current published support scope.',
+      },
+      {
+        question: 'Can I edit console saves?',
+        answer:
+          'Console saves are usually encrypted or wrapped in platform containers and are not supported.',
+      },
+    ],
+  },
+  {
+    title: 'Finding Save Files',
+    icon: 'folder',
+    questions: [
+      {
+        question: 'Where are RPG Maker MV/MZ saves located?',
+        answer:
+          'Many desktop RPG Maker MV/MZ games store saves under the game folder in www/save or save.',
+      },
+      {
+        question: 'How do I know which file to upload?',
+        answer:
+          'Choose the actual save slot file, such as file1.rpgsave or file1.rmmzsave. Do not upload an executable, archive, or unrelated game asset.',
+      },
+    ],
+  },
+  {
+    title: 'Editing Saves',
+    icon: 'pencil',
+    questions: [
+      {
+        question: 'How do I edit gold or money?',
+        answer:
+          'Upload a supported RPG Maker save, find the gold or money field, change it carefully, then download and test the new file.',
+      },
+      {
+        question: 'Can I edit items, variables, and switches?',
+        answer:
+          'Often yes for compatible RPG Maker saves, but exact meaning is game-specific. Make small changes and verify in game.',
+      },
+      {
+        question: 'Will editing break my save?',
+        answer:
+          'It can if you change the wrong value or use extreme numbers. Keep the original backup until the edited file is verified.',
+      },
+    ],
+  },
+  {
+    title: 'Troubleshooting',
+    icon: 'wrench',
+    questions: [
+      {
+        question: "Why does the editor show 'Invalid file' or 'Parse error'?",
+        answer:
+          'The file may not be a supported RPG Maker save, may be encrypted, or may use a custom structure.',
+      },
+      {
+        question: "My game won't load the edited save. What now?",
+        answer:
+          'Restore your backup, then try a smaller edit. Also check whether the game rewrote the save from cloud sync.',
+      },
+      {
+        question: 'Can I undo edits?',
+        answer:
+          'Only if you kept the original backup. Save editing should always start by copying the original file.',
+      },
+    ],
+  },
+];
+
+const allQuestions = faqCategories.flatMap((cat) => cat.questions);
+---
+
+<BaseLayout
+  title="RPG Maker Save Editor FAQ | SaveFileTool"
+  description="Answers to common questions about using SaveFileTool for compatible RPG Maker save files."
+  keywords="rpg maker save editor faq, rpgsave editor help, rmmzsave editor help"
+>
+  <section class="bg-slate-950 py-16 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
+        RPG Maker Save Editor FAQ
+      </h1>
+      <p class="mx-auto max-w-2xl text-xl text-gray-300">
+        Scope, backups, file locations, and troubleshooting for compatible RPG Maker saves.
+      </p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="mx-auto max-w-4xl">
+      <nav class="mb-12 rounded-2xl bg-gray-50 p-6">
+        <h2 class="mb-4 text-lg font-bold text-gray-900">Jump to Section</h2>
+        <div class="flex flex-wrap gap-3">
+          {
+            faqCategories.map((category, index) => (
+              <a
+                href={`#section-${index}`}
+                class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium transition-colors hover:border-primary-300 hover:bg-primary-50"
+              >
+                <FaqIcon name={category.icon} class="h-4 w-4 text-primary-500" />
+                <span>{category.title}</span>
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+
+      {
+        faqCategories.map((category, catIndex) => (
+          <section id={`section-${catIndex}`} class="mb-12">
+            <h2 class="mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
+              <FaqIcon name={category.icon} class="h-8 w-8 text-primary-500" />
+              {category.title}
+            </h2>
+            <div class="space-y-4">
+              {category.questions.map((faq) => (
+                <details class="group overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+                  <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold text-gray-900 hover:bg-gray-50">
+                    {faq.question}
+                    <svg class="ml-4 h-5 w-5 flex-shrink-0 text-gray-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div class="px-6 pb-6 leading-relaxed text-gray-600">{faq.answer}</div>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: allQuestions.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    })}
+  />
+</BaseLayout>

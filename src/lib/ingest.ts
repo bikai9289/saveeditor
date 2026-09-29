@@ -1,0 +1,47 @@
+import { localizePath, normalizeLang } from '../i18n/utils';
+import { SITE_ORIGIN } from './site';
+import { createUploadTicket, type UploadTicket } from './upload-vault';
+
+const RPG_MAKER_EXTENSIONS = new Set(['.rpgsave', '.rmmzsave', '.rvdata2', '.rvdata', '.rxdata', '.lsd']);
+
+function getExtension(fileName: string): string {
+    const lastDot = fileName.lastIndexOf('.');
+    return lastDot === -1 ? '' : fileName.slice(lastDot).toLowerCase();
+}
+
+export function isRpgMakerSaveFile(fileName: string): boolean {
+    return RPG_MAKER_EXTENSIONS.has(getExtension(fileName));
+}
+
+export function buildEditorUrl(token: string, locale?: string | null): string {
+    const lang = normalizeLang(locale);
+    const base = localizePath('/editor/rpg-maker-mv', lang);
+    const url = new URL(base, SITE_ORIGIN);
+    url.searchParams.set('uploadToken', token);
+    return `${url.pathname}${url.search}`;
+}
+
+export function appendUploadToken(route: string, token?: string | null): string {
+    if (!token) return route;
+    const url = new URL(route, SITE_ORIGIN);
+    url.searchParams.set('uploadToken', token);
+    return `${url.pathname}${url.search}`;
+}
+
+export function readUploadToken(search: string): string | null {
+    return new URLSearchParams(search).get('uploadToken');
+}
+
+export async function beginEditorFlow(
+    file: File,
+    options: { locale?: string | null; source: string }
+): Promise<{ ticket: UploadTicket; url: string }> {
+    if (!isRpgMakerSaveFile(file.name)) {
+        throw new Error('This public editor currently supports RPG Maker save files only.');
+    }
+    const ticket = await createUploadTicket(file, options);
+    return {
+        ticket,
+        url: buildEditorUrl(ticket.token, ticket.locale),
+    };
+}

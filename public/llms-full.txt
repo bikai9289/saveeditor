@@ -1,0 +1,45 @@
+# SaveFileTool
+
+> Browser-based RPG Maker save editor for compatible local save files.
+
+## Site Identity
+
+- **Name**: SaveFileTool
+- **URL**: https://savefiletool.com
+- **Type**: Free web application
+- **Category**: UtilitiesApplication
+- **Operating System**: Web Browser
+- **Pricing**: Free, no registration required
+- **File size limit**: 50 MB per file
+
+## Current Public Routes
+
+| Page | URL |
+| --- | --- |
+| Home | https://savefiletool.com/ |
+| RPG Maker Editor | https://savefiletool.com/editor/rpg-maker-mv/ |
+| FAQ | https://savefiletool.com/faq/ |
+| Support | https://savefiletool.com/support/ |
+| About | https://savefiletool.com/about/ |
+| Contact | https://savefiletool.com/contact/ |
+| Privacy | https://savefiletool.com/privacy/ |
+| Terms | https://savefiletool.com/terms/ |
+| Cookie Policy | https://savefiletool.com/cookie-policy/ |
+
+## Published Editor Scope
+
+| Scope | Extensions | Notes |
+| --- | --- | --- |
+| RPG Maker MV/MZ | .rpgsave, .rmmzsave | Browser-side edit and rebuild for compatible saves |
+| RPG Maker XP/VX/VX Ace | .rvdata2, .rvdata, .rxdata | Limited common-field editing |
+| RPG Maker 2000/2003 | .lsd | Limited common-field editing |
+
+## Evidence Status
+
+- **Sample records retained**: 3 RPG Maker fixture records
+- **Real sample count claimed**: 0
+- **Public scope**: RPG Maker save editing only
+
+## Safety Boundary
+
+SaveFileTool does not claim public editor support for other game engines on this build. The main editing workflow processes files in the browser and requires a user-selected local file.

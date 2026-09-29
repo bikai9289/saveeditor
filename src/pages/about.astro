@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About SaveFileTool | RPG Maker Save Editor"
+  description="SaveFileTool is a browser-based RPG Maker save editor for compatible local save files, with backup-first guidance and clear support limits."
+>
+  <section class="container mx-auto max-w-6xl px-4 py-12">
+    <div class="mb-16 text-center">
+      <h1 class="mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
+        About SaveFileTool
+      </h1>
+      <p class="mx-auto max-w-3xl text-xl text-gray-600 dark:text-gray-300">
+        SaveFileTool is a focused browser-based editor for compatible RPG Maker save files.
+        The public editor is intentionally scoped, backup-first, and clear about its limits.
+      </p>
+    </div>
+
+    <div class="mb-16 grid gap-8 md:grid-cols-3">
+      <div class="rounded-xl border border-gray-100 bg-white p-8 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class="mb-2 text-4xl font-bold text-primary-600">Browser</div>
+        <div class="font-medium text-gray-600 dark:text-gray-400">Main Editing Flow</div>
+      </div>
+      <div class="rounded-xl border border-gray-100 bg-white p-8 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class="mb-2 text-4xl font-bold text-primary-600">6</div>
+        <div class="font-medium text-gray-600 dark:text-gray-400">RPG Maker Extensions</div>
+      </div>
+      <div class="rounded-xl border border-gray-100 bg-white p-8 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class="mb-2 text-4xl font-bold text-primary-600">Free</div>
+        <div class="font-medium text-gray-600 dark:text-gray-400">No Account Required</div>
+      </div>
+    </div>
+
+    <div class="prose prose-lg prose-blue max-w-none dark:prose-invert">
+      <section class="mb-16">
+        <h2>Our Scope</h2>
+        <p>
+          The published editor is for RPG Maker MV/MZ <code>.rpgsave</code> and
+          <code>.rmmzsave</code> files, plus limited common-field editing for older RPG Maker
+          <code>.rvdata2</code>, <code>.rvdata</code>, <code>.rxdata</code>, and
+          <code>.lsd</code> saves.
+        </p>
+        <p>
+          We do not present the current public site as a universal save editor. If a format is not
+          listed on the RPG Maker editor page, it is outside the public support scope for this build.
+        </p>
+      </section>
+
+      <section class="mb-16 rounded-2xl bg-gray-50 p-8 dark:bg-gray-800 md:p-12">
+        <h2>Privacy Model</h2>
+        <p>
+          The main editor reads and rebuilds selected files in the browser. The old recovery page
+          and server parse API have been removed so the product message stays aligned with the
+          local-processing workflow.
+        </p>
+        <p>
+          We use Google Analytics and AdSense for site performance and ads; see the Privacy and
+          Cookie policies for details.
+        </p>
+      </section>
+
+      <section class="mb-16">
+        <h2>Published Support</h2>
+        <div class="not-prose grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <div class="font-bold">RPG Maker MV/MZ</div>
+            <div class="text-sm text-gray-500">.rpgsave, .rmmzsave</div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <div class="font-bold">RPG Maker XP/VX/VX Ace</div>
+            <div class="text-sm text-gray-500">.rvdata2, .rvdata, .rxdata</div>
+          </div>
+          <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <div class="font-bold">RPG Maker 2000/2003</div>
+            <div class="text-sm text-gray-500">.lsd</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

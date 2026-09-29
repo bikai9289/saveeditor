@@ -1,0 +1,68 @@
+---
+import { ui, defaultLang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang?: keyof typeof ui;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+
+const faqs = [
+  { q: t('faq.q1'), a: t('faq.a1') },
+  { q: t('faq.q2'), a: t('faq.a2') },
+  { q: t('faq.q3'), a: t('faq.a3') },
+  { q: t('faq.q4'), a: t('faq.a4') },
+  { q: t('faq.q5'), a: t('faq.a5') },
+  { q: t('faq.q6'), a: t('faq.a6') },
+  { q: t('faq.q7'), a: t('faq.a7') },
+  { q: t('faq.q8'), a: t('faq.a8') },
+  { q: t('faq.q9'), a: t('faq.a9') },
+  { q: t('faq.q10'), a: t('faq.a10') },
+  { q: t('faq.q11'), a: t('faq.a11') },
+  { q: t('faq.q12'), a: t('faq.a12') },
+];
+---
+
+<div class="max-w-3xl mx-auto px-4">
+  <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">{t('faq.title')}</h2>
+  <div class="space-y-4">
+    {
+      faqs.map((faq, index) => (
+        <details class="group bg-white rounded-xl shadow-sm border border-gray-100 open:border-primary-200 transition-colors">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <h3 class="font-bold text-gray-800 pr-4">{faq.q}</h3>
+            <span class="text-primary-600 transition-transform group-open:rotate-180">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-600 leading-relaxed text-sm">{faq.a}</div>
+        </details>
+      ))
+    }
+  </div>
+</div>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  })}
+/>

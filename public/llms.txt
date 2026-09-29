@@ -1,0 +1,25 @@
+# SaveFileTool
+
+> Browser-based RPG Maker save editor for compatible local save files.
+
+For full documentation, see: https://savefiletool.com/llms-full.txt
+
+## Current Public Routes
+
+- /
+- /editor/rpg-maker-mv/
+- /faq/
+- /support/
+- /about/
+- /contact/
+- /privacy/
+- /terms/
+- /cookie-policy/
+
+## Published Editor Scope
+
+- RPG Maker MV/MZ: .rpgsave, .rmmzsave
+- RPG Maker XP/VX/VX Ace: .rvdata2, .rvdata, .rxdata limited common-field editing
+- RPG Maker 2000/2003: .lsd limited common-field editing
+
+SaveFileTool does not claim public editor support for other game engines on this build. Files are processed by the main editor in the browser.
