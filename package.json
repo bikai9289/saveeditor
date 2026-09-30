@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "index:urls": "node scripts/search-console-urls.js",
-    "test": "npm run build"
+    "test": "npm run build && npm run verify:safety",
+    "verify:safety": "tsx scripts/verify-editor-safety.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",

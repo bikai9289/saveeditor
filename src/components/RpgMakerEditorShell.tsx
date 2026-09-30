@@ -66,7 +66,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                     setError(outcome.reason || 'This public editor currently supports RPG Maker save files only.');
                     setErrorAdvice([
                         'Current public entry: tested RPG Maker MZ .rmmzsave files.',
-                        'Use a backup copy first. The editor runs locally in your browser and does not upload save contents to a server.',
+                        'Nothing is uploaded. Everything happens in your browser. Use a backup copy first.',
                     ]);
                     setLoading(false);
                     return;
@@ -176,12 +176,15 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                         Choose another file
                     </button>
                     {supportPack && (
-                        <a
-                            href={supportPackMailto(supportPack)}
-                            className="rounded-lg bg-red-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-red-700"
-                        >
-                            Send support details
-                        </a>
+                        <div className="flex flex-col items-center gap-1">
+                            <a
+                                href={supportPackMailto(supportPack)}
+                                className="rounded-lg bg-red-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-red-700"
+                            >
+                                Send support details
+                            </a>
+                            <span className="text-xs text-red-700">Email includes file metadata and signatures only, never save contents.</span>
+                        </div>
                     )}
                 </div>
             </div>
@@ -189,7 +192,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
     }
 
     const canSave = Boolean(capabilities?.canSave);
-    const isRpgMakerFormat = format === 'rpgmaker' || format === 'rpgmaker-ruby-marshal' || format === 'rpgmaker-2000-2003-lsd';
+    const isRpgMakerFormat = format === 'rpgmaker';
 
     return (
         <div className="mx-auto max-w-6xl space-y-6">
