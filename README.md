@@ -27,6 +27,10 @@ npm run build
 
 The production build prerenders the public RPG Maker editor, FAQ, support, and legal pages.
 
+## Contact Email
+
+The contact form sends through Resend from the server-side Cloudflare route `/api/contact`; it does not require a mail client on the visitor's device. Configure `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `SUPPORT_EMAIL` as Cloudflare secrets or environment variables before deployment. The sender domain must be verified in Resend.
+
 ## Indexing Helpers
 
 ```bash
