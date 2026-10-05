@@ -5,6 +5,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homeHref = '/';
 const normalizedPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const editorHref = normalizedPath.startsWith('/editor/rpg-maker-mv/')
+  ? '/editor/rpg-maker-mv'
+  : '/editor/rpg-maker-mz';
 const isCurrentPath = (path: string) => normalizedPath === (path.endsWith('/') ? path : `${path}/`);
 ---
 
@@ -61,7 +64,8 @@ const isCurrentPath = (path: string) => normalizedPath === (path.endsWith('/') ?
       </button>
 
       <a
-        href={localizePath('/editor/rpg-maker-mz', lang)}
+        id="header-start-editing"
+        href={localizePath(editorHref, lang)}
         class="hidden sm:block bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
       >
         {t('nav.start')}
@@ -98,6 +102,7 @@ const isCurrentPath = (path: string) => normalizedPath === (path.endsWith('/') ?
         >MZ Editor</a
       >
       <a href={localizePath('/editor/rpg-maker-mv', lang)} aria-current={isCurrentPath('/editor/rpg-maker-mv/') ? 'page' : undefined} class="block py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 rounded-lg dark:text-gray-300 dark:hover:bg-gray-800">MV Editor</a>
+      <a id="mobile-start-editing" href={localizePath(editorHref, lang)} class="block rounded-lg bg-primary-600 px-4 py-3 text-base font-medium text-white hover:bg-primary-700">{t('nav.start')}</a>
       <a
         href={localizePath('/faq', lang)}
         aria-current={isCurrentPath('/faq/') ? 'page' : undefined}

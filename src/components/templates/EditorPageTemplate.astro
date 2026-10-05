@@ -4,6 +4,7 @@ import EditorApp from '../../components/EditorApp';
 import { localizePath, useTranslations, type SiteLang } from '../../i18n/utils';
 import { absoluteUrl, getSiteOrigin } from '../../lib/site';
 import { editors } from '../../data/editors';
+import RpgMakerMvGuide from '../RpgMakerMvGuide.astro';
 
 interface EngineData {
   slug: string;
@@ -88,11 +89,7 @@ const editorUrl = absUrl(editorHref);
           {engine.features.map((feature) => <li>{feature}</li>)}
         </ul>
         {engine.slug === 'rpg-maker-mv' && (
-          <>
-            <h2>What is an .rpgsave file?</h2>
-            <p>An .rpgsave file is a desktop RPG Maker MV save slot. This free .rpgsave editor lets you change gold in compatible saves locally. Encrypted saves and custom plugin formats may not work.</p>
-            <p>Verification uses an official MV trial project. It confirms gold editing and game loading for that project; other fields and third-party games need their own in-game checks.</p>
-          </>
+          <RpgMakerMvGuide />
         )}
         <p>
           Using another RPG Maker format?{' '}

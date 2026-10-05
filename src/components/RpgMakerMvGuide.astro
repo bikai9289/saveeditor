@@ -1,0 +1,166 @@
+<section aria-label="RPG Maker MV save editing guide">
+  <h2>What is an .rpgsave editor?</h2>
+  <p>
+    An .rpgsave editor reads a RPG Maker MV save slot and lets you change compatible values
+    before rebuilding the file. SaveFileTool runs this workflow in your browser. Choose your
+    desktop save above, check the detected gold value, make a small change, and download a zip
+    containing the edited save and an original backup. You do not need an account or an installer.
+  </p>
+  <p>
+    An MV save records more than money: it can contain party members, inventory, map position,
+    switches, variables, and progress. Those values belong to the game's rules. A number that
+    looks editable may control a quest or an event rather than a resource. Gold is the verified
+    edit path here; other detected fields remain candidates until you check them in your game.
+  </p>
+
+  <h2>Where to find RPG Maker MV save files</h2>
+  <p>
+    For a downloaded Windows game, start in the folder containing its executable. Many packaged
+    MV games put the project inside <code>www/</code>, with saves in <code>www/save/</code>.
+    Others keep project files next to the executable and use <code>save/</code> directly.
+    An editor test project commonly uses the project's own <code>save/</code> folder.
+    Plugins and distribution choices can change these locations, so they are places to check,
+    not a promise that every MV game uses the same directory.
+  </p>
+  <p>
+    Save once in the game before searching. Look for a slot such as <code>file1.rpgsave</code>
+    and compare its modification time with your latest save. Files named <code>global.rpgsave</code>
+    or <code>config.rpgsave</code> serve different purposes; choose the numbered slot for changing
+    party gold. If several copies exist, make a fresh save and identify which directory changes.
+    Copy that file somewhere separate before opening it in the editor.
+  </p>
+  <p>
+    A game marked “Play in browser” may store progress in browser storage instead of writing
+    an .rpgsave file to disk. A desktop file picker cannot select that stored record directly.
+    Use an export feature provided by the game if one exists, or consult its save instructions.
+    Changing a downloaded web page's filename to <code>.rpgsave</code> does not create a save.
+  </p>
+
+  <h2>Change gold and load the edited save</h2>
+  <ol>
+    <li>
+      <strong>Record the starting value.</strong> Open the game's menu, note your gold, and save
+      to a known slot. Close the game before replacing files so it cannot overwrite your changes.
+    </li>
+    <li>
+      <strong>Make a separate backup.</strong> Copy the numbered .rpgsave file to another folder.
+      Keep its original name so you can restore the right slot later.
+    </li>
+    <li>
+      <strong>Choose the file above.</strong> Confirm that the editor identifies RPG Maker MV
+      and displays the gold you recorded. If the values do not match, check the slot and directory
+      before editing; you may have selected an older save.
+    </li>
+    <li>
+      <strong>Edit one value.</strong> Enter a modest gold amount and leave other fields alone
+      for the first attempt. Avoid extreme numbers or multiple changes that make a failure hard
+      to diagnose.
+    </li>
+    <li>
+      <strong>Download and extract the zip.</strong> The package contains the rebuilt slot,
+      the original backup, and instructions. Put the edited numbered file in the game's save
+      directory; do not place the zip itself there or replace it with the backup-prefixed file.
+    </li>
+    <li>
+      <strong>Load the same slot.</strong> Reopen the game, choose Continue, and inspect the gold
+      in its menu. Check your location and party as well. Keep the backup until the game loads
+      correctly and normal play resumes.
+    </li>
+  </ol>
+
+  <h2>What the MV gold verification covers</h2>
+  <p>
+    Our verification used the official RPG Maker MV 1.6.1 trial package's default project,
+    running in its Windows game runtime. The game generated the original .rpgsave with
+    <strong>1234 gold</strong>. The local editor changed it to <strong>98765</strong>, exported
+    it, and the MV game loaded the edited file successfully. Its menu displayed the new amount.
+    This checks the full save, edit, export, and game-load workflow.
+  </p>
+  <p>
+    Comparing the decoded files showed that only the party gold field changed. Control values
+    remained intact: variable 1 was 42, switch 1 was true, and item 1 had a quantity of 3.
+    The exported original backup also matched the input file byte for byte. These are preservation
+    checks; they do not establish that editing those other fields is safe in every game.
+  </p>
+  <p>
+    This evidence comes from an official trial project, not a third-party commercial game.
+    It supports the standard MV gold workflow. A game with custom save plugins, integrity
+    checks, or a different data layout needs its own small edit and in-game loading check.
+    Keep that distinction in mind when deciding whether to replace a valuable progress file.
+  </p>
+
+  <h2>MV .rpgsave and MZ .rmmzsave are different formats</h2>
+  <p>
+    RPG Maker MV and MZ use different save formats even when their games look similar.
+    Standard MV 1.6.1 saves use LZString compression encoded as Base64. Standard MZ saves use
+    a different compression workflow based on pako. Their filenames identify different engine
+    formats: <code>.rpgsave</code> for MV and <code>.rmmzsave</code> for MZ. Changing the extension
+    does not convert the stored data or the engine objects inside it.
+  </p>
+  <p>
+    This page accepts .rpgsave files only. If your actual slot ends in .rmmzsave, open the
+    <a href="/editor/rpg-maker-mz/">RPG Maker MZ save editor</a> instead. Older extensions such
+    as <code>.rxdata</code>, <code>.rvdata</code>, and <code>.rvdata2</code> belong to other
+    RPG Maker generations and are outside this page's published support. Choose the editor
+    by the original file extension rather than the game's art style.
+  </p>
+
+  <h2>Why plugins and custom saves may not work</h2>
+  <p>
+    MV developers can install plugins that add fields, encrypt saves, change compression,
+    or move data into another container. A file can still end in .rpgsave while differing from
+    the default engine layout. Parsing a file successfully also does not prove that every
+    displayed field has the meaning you expect, or that the game's own checks will accept
+    an edited value.
+  </p>
+  <p>
+    If a save fails to parse, try a newly created slot from the same game and confirm that
+    you selected the actual save rather than an archive or asset. If the rebuilt file fails
+    to load, restore your backup and retry a smaller gold-only change. Persistent failure
+    suggests that this game's structure needs further investigation; repeatedly renaming
+    or recompressing the file is not a reliable fix.
+  </p>
+
+  <h2>Privacy, backups, and the 10 MB limit</h2>
+  <p>
+    Selecting a save here reads it locally in your browser. The editing workflow does not
+    upload your save contents to a server. The download includes the original backup so you
+    can reverse a failed change. Keep an additional copy outside the game directory as well,
+    particularly if a launcher or cloud service synchronizes that folder.
+  </p>
+  <p>
+    Files larger than 10 MB are rejected. If you selected a whole project or zip archive,
+    extract it and choose the numbered save itself. An unusually large .rpgsave may contain
+    plugin data; do not delete parts of the file merely to fit the limit. Optional local history
+    stores copies in browser storage on your device, and it is separate from your game directory.
+  </p>
+
+  <h2>RPG Maker MV save editing questions</h2>
+  <h3>Why does the game still show my old gold?</h3>
+  <p>
+    Check that you extracted the edited file, replaced the correct slot, and loaded that slot
+    after restarting the game. Multiple installations can have separate save folders. Cloud
+    synchronization or a still-running game may also restore an older copy; compare file
+    modification times before trying another edit.
+  </p>
+  <h3>Can I open the .rpgsave file in a text editor instead?</h3>
+  <p>
+    A standard MV save contains compressed data, so its visible text is not ordinary editable
+    JSON. Changing characters directly can damage the encoded content. Use a compatible editor
+    to decode and rebuild it, and keep your original file for recovery.
+  </p>
+  <h3>Can this editor change quest switches or inventory safely?</h3>
+  <p>
+    Those fields are candidates. Their meaning and allowed values depend on the game and its
+    plugins. Folder Mode can load names from the game's JSON data files to help identify IDs,
+    but labels are not a compatibility guarantee. Test one small change in a disposable slot
+    before editing progress you want to keep.
+  </p>
+  <h3>What should I do if the edited slot will not load?</h3>
+  <p>
+    Close the game and restore the original numbered file from your separate backup or the
+    downloaded package. Check that the restored slot loads normally. Then, if you retry,
+    change only gold and use a conservative value. Keep the failing edited copy separate
+    from your working backup so you can compare the two.
+  </p>
+</section>
