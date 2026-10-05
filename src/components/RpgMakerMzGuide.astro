@@ -1,0 +1,171 @@
+<section aria-label="RPG Maker MZ save editing guide">
+  <h2>What is an .rmmzsave editor?</h2>
+  <p>
+    An .rmmzsave editor opens a compatible RPG Maker MZ save slot, displays its stored values,
+    and rebuilds the file after an edit. SaveFileTool lets you do this online while keeping the
+    save contents on your device. Select the numbered slot above, review the detected money
+    value, and download your edited copy with its original backup. No account or software
+    installation is required to use the editor.
+  </p>
+  <p>
+    MZ saves can hold currency, actor data, equipment, event flags, and the state of the current
+    map. The editor cannot tell you what every field means in every game. Start with the gold
+    or money field, which is the tested editing workflow. A game may call that currency Gems,
+    coins, or something else. The label in its menu can differ from the field used by the engine.
+  </p>
+
+  <h2>Where to find RPG Maker MZ save files</h2>
+  <p>
+    In many desktop MZ games, the numbered saves are inside a <code>save/</code> directory
+    beneath the game folder. Locate the installed game, create a fresh save in a known slot,
+    then look for a file such as <code>file1.rmmzsave</code> whose modification time matches
+    that action. A shortcut on your desktop may point somewhere else; open the installation
+    directory rather than searching only beside the shortcut.
+  </p>
+  <p>
+    Packaging and save-location plugins can change the directory layout. Some installations
+    place the project inside another folder, while a developer may deliberately store saves
+    outside the installation. If the expected folder is empty, consult the game's documentation
+    and search the relevant game directories for <code>*.rmmzsave</code>. When multiple copies
+    exist, use a new save and its timestamp to identify the active one before replacing anything.
+  </p>
+  <p>
+    Choose a numbered progress slot, not <code>config.rmmzsave</code> or
+    <code>global.rmmzsave</code>. Those files manage settings and save-list information rather
+    than the party's progress. Also note that MZ can use slot zero for an autosave; a manual
+    slot is easier to identify and control when testing an edit. Keep a copy in a separate
+    folder, with a note of which installation and slot it came from.
+  </p>
+  <p>
+    A browser-hosted MZ game usually keeps saves in browser-managed storage, such as IndexedDB,
+    rather than creating a selectable file in Downloads. That is a different access path from
+    a desktop save folder. Look for the game's own export function or documented backup
+    procedure. This page's file picker needs an actual .rmmzsave file; choosing the game's
+    web page or clearing browser storage will not export your progress.
+  </p>
+
+  <h2>Edit MZ money with a controlled backup workflow</h2>
+  <p>
+    Before editing, note the currency displayed in the game's menu and save manually. Exit
+    the game, copy the numbered file to a backup folder, and select the working copy here.
+    Check that the detected amount matches the slot you intended to change. A mismatch is
+    a reason to inspect the file location or slot, rather than immediately replacing the number.
+  </p>
+  <p>
+    Change only money on your first attempt and choose an amount that makes sense for the
+    game. Download the package, extract it, and use the rebuilt numbered file. The zip also
+    includes an unchanged original backup and instructions. A zip archive is not a game save,
+    and the backup-prefixed filename is not the numbered slot the game expects to load.
+  </p>
+  <p>
+    With the game closed, put the edited file in the active save directory under its original
+    slot name. Restart, load that slot, and check the currency, party, and current location.
+    Continue briefly to confirm that normal events still work. Retain the backup even after
+    a successful load; it gives you a recovery point if you discover an issue later.
+  </p>
+
+  <h2>A real MZ game test: Gems in Haven</h2>
+  <p>
+    Our recorded MZ verification used a real desktop save from
+    <strong>Haven: Secret of Caledria</strong>. After editing its money value, the game was
+    restarted and the save loaded. The game menu showed <strong>Gems 999,999</strong> at
+    <strong>Olund Fort</strong>. Olund Fort is the in-game location in that record, not the
+    game's title. This provides a game-load check beyond simply displaying a number in a parser.
+  </p>
+  <p>
+    Separate regression checks cover rebuilding a save without changes and exporting a
+    gold-only change while preserving the other decoded fields. The original backup in the
+    download package is checked byte for byte against the selected file. A rebuilt compressed
+    save can have different bytes while representing the same data, so data preservation and
+    an unchanged backup are distinct checks.
+  </p>
+  <p>
+    This is evidence for the tested money workflow in that game save. It does not verify every
+    Haven feature, every MZ release, or every plugin configuration. Actor levels, inventory,
+    variables, and switches remain candidate edits here. Use your game's own loading behavior
+    as the final check, especially when working with a long-running playthrough.
+  </p>
+
+  <h2>MZ .rmmzsave and MV .rpgsave are different formats</h2>
+  <p>
+    MZ's standard save workflow serializes game data and compresses it using pako. MV's
+    standard .rpgsave workflow instead uses LZString compression with Base64 encoding.
+    Although both engines can store familiar things such as party money and inventory,
+    their file representations differ. Renaming an MV file to end in .rmmzsave does not
+    translate its compression or make it an MZ slot.
+  </p>
+  <p>
+    Use this RPG Maker MZ save editor online for actual <code>.rmmzsave</code> files.
+    If the original extension is <code>.rpgsave</code>, follow the
+    <a href="/editor/rpg-maker-mv/">RPG Maker MV save editor</a> link instead.
+    Each public page checks its own extension before parsing. Older RPG Maker formats,
+    executables, and project archives are outside this page's accepted inputs, even if they
+    were downloaded with an RPG Maker game.
+  </p>
+
+  <h2>Why plugins and custom saves may not work</h2>
+  <p>
+    A developer can alter MZ's save process with plugins, including where files are written,
+    which objects are stored, or whether the contents are encrypted. Some games implement
+    their own currencies rather than using the party's standard money field. A familiar
+    extension therefore identifies where to start, but it does not guarantee a compatible
+    structure or the meaning of every number you see.
+  </p>
+  <p>
+    If a file is rejected, confirm its original extension and try a fresh manual slot from
+    the same game. If it opens but the edited copy will not load, restore the backup and
+    attempt a smaller money-only change. Avoid repeatedly changing unknown fields to force
+    a result. A custom structure may require game-specific investigation rather than a larger edit.
+  </p>
+
+  <h2>Privacy, backups, and the 10 MB limit</h2>
+  <p>
+    The save-editing workflow reads and rebuilds your selected file in the browser. Save
+    contents are not sent to a server as part of choosing, editing, or downloading the slot.
+    Optional local history can retain copies in browser storage on your device. That history
+    is separate from the game's directory and is not a substitute for a backup you can
+    restore directly through your file manager.
+  </p>
+  <p>
+    The file limit is 10 MB. Select the save itself rather than an entire project, exported
+    game, or archive. If an actual .rmmzsave exceeds the limit, it may include substantial
+    custom data; deleting arbitrary sections is not a safe way to make it smaller. Keep
+    the full original and check the game's save guidance before proceeding.
+  </p>
+
+  <h2>RPG Maker MZ save editing questions</h2>
+  <h3>Why does my game call the money Gems instead of gold?</h3>
+  <p>
+    Developers can customize the displayed currency name. In the Haven test, the menu label
+    was Gems while the edited value was the party's money field. Compare the detected amount
+    with your game's menu. If they differ, the game may use a separate currency system,
+    so do not assume the gold field controls the resource you want.
+  </p>
+  <h3>Should I edit the autosave or a manual slot?</h3>
+  <p>
+    Start with a manual slot you can select explicitly on the load screen. An autosave may
+    be replaced as you continue playing or enter a new area. A known manual slot and a
+    separate backup make it easier to determine whether the game loaded your edited copy.
+  </p>
+  <h3>Why did the downloaded save appear not to change anything?</h3>
+  <p>
+    Confirm the active installation, slot filename, and directory. Extract the package before
+    copying the edited file, and restart the game before loading it. A running game or cloud
+    synchronization can replace a disk file with an older version. Compare modification
+    times and the menu's currency rather than relying on the download filename alone.
+  </p>
+  <h3>Does Folder Mode make inventory or quest edits verified?</h3>
+  <p>
+    Folder Mode can read names from the game's JSON data files, helping you recognize actor,
+    item, variable, and switch IDs. Those names provide context, not a guarantee that an edit
+    fits the game's current state. Quest flags may depend on other events. Test candidate
+    fields individually in a spare slot and preserve your main progress backup.
+  </p>
+  <h3>How do I recover from a save that will not load?</h3>
+  <p>
+    Exit the game and replace the edited numbered file with the original backup, keeping
+    the expected slot name. Verify that the restored slot loads before trying again. Keep
+    any failed export separate from the working copy, and avoid making more changes to the
+    only backup of your playthrough.
+  </p>
+</section>

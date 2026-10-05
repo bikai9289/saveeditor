@@ -5,6 +5,7 @@ import { localizePath, useTranslations, type SiteLang } from '../../i18n/utils';
 import { absoluteUrl, getSiteOrigin } from '../../lib/site';
 import { editors } from '../../data/editors';
 import RpgMakerMvGuide from '../RpgMakerMvGuide.astro';
+import RpgMakerMzGuide from '../RpgMakerMzGuide.astro';
 
 interface EngineData {
   slug: string;
@@ -90,6 +91,9 @@ const editorUrl = absUrl(editorHref);
         </ul>
         {engine.slug === 'rpg-maker-mv' && (
           <RpgMakerMvGuide />
+        )}
+        {engine.slug === 'rpg-maker-mz' && (
+          <RpgMakerMzGuide />
         )}
         <p>
           Using another RPG Maker format?{' '}
