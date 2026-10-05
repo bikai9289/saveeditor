@@ -1,0 +1,9 @@
+---
+import EditorPageTemplate from '../../components/templates/EditorPageTemplate.astro';
+import { editors } from '../../data/editors';
+
+const engine = editors.find((entry) => entry.slug === 'rpg-maker-mv');
+if (!engine) throw new Error('RPG Maker MV editor configuration is missing.');
+---
+
+<EditorPageTemplate engine={engine} lang="en" />

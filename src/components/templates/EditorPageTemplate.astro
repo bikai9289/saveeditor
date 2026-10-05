@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import EditorApp from '../../components/EditorApp';
 import { localizePath, useTranslations, type SiteLang } from '../../i18n/utils';
 import { absoluteUrl, getSiteOrigin } from '../../lib/site';
+import { editors } from '../../data/editors';
 
 interface EngineData {
   slug: string;
@@ -71,7 +72,7 @@ const editorUrl = absUrl(editorHref);
       </div>
 
       <div class="prose prose-blue mt-16 max-w-none dark:prose-invert">
-        <h2>How to use the RPG Maker editor</h2>
+        <h2>How to use the {engine.name} editor</h2>
         <ol>
           {
             engine.instructions.map((step) => (
@@ -86,6 +87,19 @@ const editorUrl = absUrl(editorHref);
         <ul>
           {engine.features.map((feature) => <li>{feature}</li>)}
         </ul>
+        {engine.slug === 'rpg-maker-mv' && (
+          <>
+            <h2>What is an .rpgsave file?</h2>
+            <p>An .rpgsave file is a desktop RPG Maker MV save slot. This free .rpgsave editor lets you change gold in compatible saves locally. Encrypted saves and custom plugin formats may not work.</p>
+            <p>Verification uses an official MV trial project. It confirms gold editing and game loading for that project; other fields and third-party games need their own in-game checks.</p>
+          </>
+        )}
+        <p>
+          Using another RPG Maker format?{' '}
+          {editors.filter(other => other.slug !== engine.slug).map(other => (
+            <a href={localizePath(`/editor/${other.slug}`, lang)}>{other.name} editor ({other.fileType})</a>
+          ))}
+        </p>
 
         <div class="not-prose mt-10 rounded-xl border border-blue-100 bg-blue-50 p-6 dark:border-blue-900/30 dark:bg-blue-950/20">
           <h3 class="mb-2 text-lg font-bold text-blue-900 dark:text-blue-400">Backup-first editing</h3>

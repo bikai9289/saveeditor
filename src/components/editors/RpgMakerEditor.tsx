@@ -36,6 +36,7 @@ interface RpgMakerEditorProps {
     data: RpgMakerData;
     onChange: (newData: RpgMakerData) => void;
     readOnly?: boolean;
+    isMv?: boolean;
 }
 
 interface GameFolderContext {
@@ -58,7 +59,7 @@ const emptyFolderContext: GameFolderContext = {
     maps: {},
 };
 
-export default function RpgMakerEditor({ data, onChange, readOnly = false }: RpgMakerEditorProps) {
+export default function RpgMakerEditor({ data, onChange, readOnly = false, isMv = false }: RpgMakerEditorProps) {
     const [folderContext, setFolderContext] = React.useState<GameFolderContext>(emptyFolderContext);
     const [itemId, setItemId] = React.useState('1');
     const [itemAmount, setItemAmount] = React.useState('99');
@@ -70,6 +71,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
     const variables = root?.variables || root?._variables || data?.variables;
     const switches = root?.switches || root?._switches || data?.switches;
     const actors = root?.actors || root?._actors || data?.actors;
+    const actorList = jsonExArray(actors?._data);
     const canEditGold = true;
     const canEditItems = true;
     const canEditVariables = true;
@@ -121,7 +123,7 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <h4 className="text-base font-semibold text-gray-800">RPG Maker Folder Mode</h4>
-                        <p className="text-xs text-gray-500">Optional: choose the game folder to label candidate item, actor, variable, and switch IDs locally from RPG Maker MZ JSON data files.</p>
+                        <p className="text-xs text-gray-500">Optional: choose the game folder to label candidate item, actor, variable, and switch IDs locally from RPG Maker MV or MZ JSON data files.</p>
                     </div>
                     <label className="inline-flex cursor-pointer items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">
                         Open Game Folder
@@ -140,8 +142,9 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
             </div>
 
             <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-                <strong>Evidence status:</strong> gold editing is the tested path for the current
-                .rmmzsave public entry. Actor, inventory, variable, and switch fields are candidate
+                <strong>Evidence status:</strong> {isMv
+                    ? 'MV .rpgsave gold editing was verified in an official MV 1.6.1 trial project: 1234 to 98765, confirmed by loading the edited save in game.'
+                    : 'Gold editing is the tested path for the MZ .rmmzsave public entry.'} Actor, inventory, variable, and switch fields are candidate
                 fields; verify small changes in game before replacing your original save.
             </div>
 
@@ -168,14 +171,13 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
             </div>
 
             {/* Actor Parameter Sets */}
-            {actors?._data && canEditActors && (
+            {actorList && canEditActors && (
                 <div className="space-y-6">
-                    {actors._data
-                        .filter((actor: any) => actor && actor._actorId)
+                    {actorList
                         .map((actor: any, index: number) => {
-                            if (!actor) return null;
+                            if (!actor || !actor._actorId) return null;
                             const actorName = folderContext.actors[actor._actorId] || actor._name || actor.name || `Actor #${actor._actorId}`;
-                            const params = actor._paramPlus || [];
+                            const params = jsonExArray(actor._paramPlus) || [];
 
                             const paramNames = ['MHP', 'MMP', 'ATK', 'DEF', 'MAT', 'MDF', 'AGI', 'LUK'];
                             const actorId = actor._actorId;
@@ -241,7 +243,10 @@ export default function RpgMakerEditor({ data, onChange, readOnly = false }: Rpg
                                                     onChange={(e) => updateData((newData) => {
                                                         if (actorBasePath) {
                                                             ensureActorParamPlus(newData, actorBasePath);
-                                                            executePrimitiveOnRoot(newData, 'set-hp-mp', [...actorBasePath, '_paramPlus', paramIndex], parseInt(e.target.value) || 0);
+                                                            const paramPath = Array.isArray(actor._paramPlus?.['@a'])
+                                                                ? [...actorBasePath, '_paramPlus', '@a', paramIndex]
+                                                                : [...actorBasePath, '_paramPlus', paramIndex];
+                                                            executePrimitiveOnRoot(newData, 'set-hp-mp', paramPath, parseInt(e.target.value) || 0);
                                                         }
                                                     })}
                                                 />
@@ -547,8 +552,14 @@ function resolveGoldPaths(root: any): Array<Array<string | number>> {
 
 function resolveActorDataPath(root: any): Array<string | number> | null {
     if (Array.isArray(root?.actors?._data)) return ['actors', '_data'];
+    if (Array.isArray(root?.actors?._data?.['@a'])) return ['actors', '_data', '@a'];
     if (Array.isArray(root?._actors?._data)) return ['_actors', '_data'];
+    if (Array.isArray(root?._actors?._data?.['@a'])) return ['_actors', '_data', '@a'];
     return null;
+}
+
+function jsonExArray(value: any): any[] | null {
+    return Array.isArray(value) ? value : Array.isArray(value?.['@a']) ? value['@a'] : null;
 }
 
 function resolveActorExpPaths(actor: any, actorBasePath: Array<string | number>, actorId: number): Array<Array<string | number>> {
@@ -563,7 +574,7 @@ function ensureActorParamPlus(data: any, actorBasePath: Array<string | number>):
     const root = getSaveRoot(data);
     let actor = root;
     for (const key of actorBasePath) actor = actor?.[key as any];
-    if (actor && !Array.isArray(actor._paramPlus)) actor._paramPlus = [0, 0, 0, 0, 0, 0, 0, 0];
+    if (actor && !jsonExArray(actor._paramPlus)) actor._paramPlus = [0, 0, 0, 0, 0, 0, 0, 0];
 }
 
 function getInventoryMap(root: any): Record<string, number> | undefined {

@@ -1,5 +1,6 @@
 import { makeOutcome, type FormatFamily, type ParseOutcome } from './parsers/types';
 import { attachSupportPack, buildSupportPack } from './supportPack';
+import { PUBLIC_RPG_MAKER_EDITORS } from './saveExtensions';
 
 export interface ParsedSaveFileResult<TData = unknown> {
     outcome: ParseOutcome<TData>;
@@ -8,7 +9,6 @@ export interface ParsedSaveFileResult<TData = unknown> {
 }
 
 const RPG_MAKER_EXTENSIONS = new Set(['rpgsave', 'rmmzsave', 'rvdata2', 'rvdata', 'rxdata', 'lsd']);
-const PUBLIC_RPG_MAKER_MZ_EDITOR = 'rpg-maker-mz';
 
 const loadParsers = {
     rpgmaker: () => import('./parsers/rpgmaker').then((mod) => mod.parseRPGMakerMV),
@@ -19,7 +19,8 @@ export async function parseSaveFile(file: File, editorSlug = ''): Promise<Parsed
     let outcome: ParseOutcome<any>;
     let parserPath = inferParserPath(file, editorSlug);
 
-    if (editorSlug === PUBLIC_RPG_MAKER_MZ_EDITOR && ext !== 'rmmzsave') {
+    const publicEditor = Object.hasOwn(PUBLIC_RPG_MAKER_EDITORS, editorSlug) ? PUBLIC_RPG_MAKER_EDITORS[editorSlug] : undefined;
+    if (publicEditor && ext !== publicEditor.extension) {
         parserPath = 'unsupported';
         outcome = makeOutcome({
             engine: 'generic',
@@ -27,7 +28,7 @@ export async function parseSaveFile(file: File, editorSlug = ''): Promise<Parsed
             formatFamily: 'generic-binary',
             mode: 'error',
             reasonCode: 'unsupported_extension',
-            reason: 'This public editor currently supports tested RPG Maker MZ .rmmzsave files only.',
+            reason: `This editor supports ${publicEditor.name} .${publicEditor.extension} files only. Choose the matching editor for your save format.`,
             capabilities: {
                 canView: false,
                 canEdit: false,

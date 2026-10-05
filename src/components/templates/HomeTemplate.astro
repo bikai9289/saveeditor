@@ -5,7 +5,6 @@ import { ui, defaultLang } from '../../i18n/ui';
 import { useTranslations } from '../../i18n/utils';
 import { getSiteOrigin } from '../../lib/site';
 import { SMART_UPLOAD_ACCEPT } from '../../lib/saveExtensions';
-import homeScriptUrl from '../../scripts/home.ts?url';
 
 interface Props {
   lang?: keyof typeof ui;
@@ -42,7 +41,7 @@ const getPath = (path: string) => {
           Free Online RPG Maker Save Editor
         </h1>
         <p class="mx-auto mb-10 max-w-2xl text-lg text-slate-300 sm:text-xl">
-          Edit tested <strong>.rmmzsave</strong> RPG Maker MZ save files in your browser. No installer, no server upload, backup first.
+          Edit RPG Maker MZ <strong>.rmmzsave</strong> and MV <strong>.rpgsave</strong> files in your browser. No installer, no server upload, backup first.
         </p>
 
         <div class="mx-auto mb-8 max-w-2xl">
@@ -66,6 +65,7 @@ const getPath = (path: string) => {
               <p class="text-sm text-slate-400">or click to browse</p>
               <div class="mt-4 flex flex-wrap justify-center gap-2">
                 <span class="rounded bg-white/10 px-2 py-1 text-xs">.rmmzsave</span>
+                <span class="rounded bg-white/10 px-2 py-1 text-xs">.rpgsave</span>
               </div>
             </div>
           </div>
@@ -75,8 +75,9 @@ const getPath = (path: string) => {
           href={getPath('editor/rpg-maker-mz')}
           class="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
         >
-          Open RPG Maker Editor
+          Open MZ Editor
         </a>
+        <a href={getPath('editor/rpg-maker-mv')} class="ml-3 inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Open MV Editor</a>
       </div>
     </div>
   </section>
@@ -85,8 +86,8 @@ const getPath = (path: string) => {
     <div class="mx-auto max-w-6xl">
       <div class="mb-16 grid gap-4 sm:grid-cols-3">
         <div class="rounded-xl border border-blue-100 bg-blue-50 p-6 text-center">
-          <div class="text-3xl font-bold text-blue-700">1</div>
-          <div class="mt-1 text-sm font-medium text-blue-900">tested extension</div>
+          <div class="text-3xl font-bold text-blue-700">2</div>
+          <div class="mt-1 text-sm font-medium text-blue-900">tested extensions</div>
         </div>
         <div class="rounded-xl border border-green-100 bg-green-50 p-6 text-center">
           <div class="text-3xl font-bold text-green-700">Local</div>
@@ -107,7 +108,7 @@ const getPath = (path: string) => {
           <div class="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
             <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white">1</div>
             <h3 class="mb-3 text-xl font-bold text-gray-900">Choose Save</h3>
-            <p class="text-gray-600">Select a tested RPG Maker MZ .rmmzsave file from your local game folder.</p>
+            <p class="text-gray-600">Select an MV .rpgsave or MZ .rmmzsave file from your local game folder.</p>
           </div>
           <div class="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
             <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white">2</div>
@@ -130,7 +131,7 @@ const getPath = (path: string) => {
           </div>
           <div>
             <h3 class="mb-2 text-xl font-bold">RPG Maker focused</h3>
-            <p class="text-slate-300">The published editor currently accepts tested RPG Maker MZ .rmmzsave files.</p>
+            <p class="text-slate-300">Choose the MZ .rmmzsave or MV .rpgsave editor. MV gold editing is verified in an official trial project.</p>
           </div>
           <div>
             <h3 class="mb-2 text-xl font-bold">Backup-first editing</h3>
@@ -161,6 +162,7 @@ const getPath = (path: string) => {
           description: 'Browser-based RPG Maker save editor for compatible local save files.',
           featureList: [
             'Tested RPG Maker MZ .rmmzsave file entry',
+            'RPG Maker MV .rpgsave gold editing verified in an official trial project',
             'Gold and money editing with backup-first workflow',
             'Candidate field inspection for careful in-game verification',
             'Browser-side file processing',
@@ -177,7 +179,9 @@ const getPath = (path: string) => {
       <script define:vars={{ lang }}>
         window.currentLang = lang;
       </script>
-      <script type="module" src={homeScriptUrl}></script>
+      <script>
+        import '../../scripts/home';
+      </script>
     </div>
   </section>
 </BaseLayout>

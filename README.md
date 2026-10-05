@@ -1,12 +1,13 @@
 # SaveFileTool
 
-Browser-based RPG Maker MZ save editing for tested local `.rmmzsave` files.
+Browser-based RPG Maker MZ `.rmmzsave` and MV `.rpgsave` editing.
 
-The public site is intentionally scoped to a tested RPG Maker MZ `.rmmzsave` entry. It does not present itself as a universal save editor.
+The public site offers separate MZ and MV editors, each restricted to its published extension.
 
 ## Published Scope
 
 - RPG Maker MZ: `.rmmzsave`
+- RPG Maker MV: `.rpgsave`; gold editing verified in an official MV 1.6.1 trial project (1234 to 98765, loaded in game). Third-party MV games and custom plugins are not covered by that evidence.
 
 Other RPG Maker extensions are not part of the public support promise until verified with real save files.
 

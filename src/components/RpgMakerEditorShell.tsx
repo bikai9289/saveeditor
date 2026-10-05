@@ -5,6 +5,7 @@ import { getLocalRetentionEnabled, saveLocalHistoryRecord, setLocalRetentionEnab
 import RpgMakerEditor from './editors/RpgMakerEditor';
 import JsonEditor from './JsonEditor';
 import type { ParserCapability, SupportPackSummary } from '../lib/parsers/types';
+import { PUBLIC_RPG_MAKER_EDITORS } from '../lib/saveExtensions';
 
 interface RpgMakerEditorShellProps {
     file: File;
@@ -14,6 +15,8 @@ interface RpgMakerEditorShellProps {
 }
 
 export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMakerEditorShellProps) {
+    const currentEditor = editorSlug ? PUBLIC_RPG_MAKER_EDITORS[editorSlug] : undefined;
+    const isMv = file.name.toLowerCase().endsWith('.rpgsave');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [errorAdvice, setErrorAdvice] = useState<string[]>([]);
@@ -65,7 +68,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                     setData(null);
                     setError(outcome.reason || 'This public editor currently supports RPG Maker save files only.');
                     setErrorAdvice([
-                        'Current public entry: tested RPG Maker MZ .rmmzsave files.',
+                        currentEditor ? `This page accepts ${currentEditor.name} .${currentEditor.extension} files.` : 'Published formats: MV .rpgsave and MZ .rmmzsave.',
                         'Nothing is uploaded. Everything happens in your browser. Use a backup copy first.',
                     ]);
                     setLoading(false);
@@ -202,7 +205,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
                         <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-primary-600">RPG Maker Save Editor</p>
                         <h1 className="text-2xl font-bold text-gray-900">{file.name}</h1>
                         <p className="mt-2 text-sm text-gray-600">
-                            Parsed locally as {formatLabel(format)}. Download creates a zip containing the edited file and the original backup.
+                            Parsed locally as {formatLabel(format, isMv)}. Download creates a zip containing the edited file and the original backup.
                         </p>
                     </div>
                     <div className="flex flex-col gap-3 sm:flex-row">
@@ -253,7 +256,7 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
 
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
                 {isRpgMakerFormat ? (
-                    <RpgMakerEditor data={data} onChange={setData} readOnly={!capabilities?.canEdit} />
+                    <RpgMakerEditor data={data} onChange={setData} readOnly={!capabilities?.canEdit} isMv={isMv} />
                 ) : (
                     <JsonEditor data={data} onChange={setData} readOnly={!capabilities?.canEdit} />
                 )}
@@ -262,8 +265,8 @@ export default function RpgMakerEditorShell({ file, onBack, editorSlug }: RpgMak
     );
 }
 
-function formatLabel(format: string): string {
-    if (format === 'rpgmaker') return 'RPG Maker MZ';
+function formatLabel(format: string, isMv: boolean): string {
+    if (format === 'rpgmaker') return isMv ? 'RPG Maker MV' : 'RPG Maker MZ';
     return 'RPG Maker candidate structure';
 }
 

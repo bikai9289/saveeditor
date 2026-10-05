@@ -1,6 +1,6 @@
 import type { FormatFamily, ParserEngine, RoundTripSupportLevel } from '../lib/parsers/types';
 
-export type SampleKind = 'synthetic-fixture' | 'real-anonymized' | 'structure-only';
+export type SampleKind = 'synthetic-fixture' | 'real-anonymized' | 'structure-only' | 'official-trial-project';
 export type PrivacyLevel = 'public-fixture' | 'private-regression' | 'structure-only';
 export type EvidenceScope = 'engine-core' | 'format-core' | 'game-specific';
 export type PresetConfidence = 'verified' | 'candidate' | 'blocked';
@@ -71,6 +71,23 @@ export interface ResolvedPreset extends GamePreset {
 }
 
 export const sampleRecords: SampleRecord[] = [
+    {
+        id: 'official-trial-rpgmaker-mv-161-gold',
+        gameSlug: 'rpg-maker-mv',
+        engine: 'rpgmaker',
+        format: '.rpgsave',
+        platform: 'Windows NW.js',
+        gameVersion: 'MV 1.6.1 official trial NewData project',
+        sampleKind: 'official-trial-project',
+        privacyLevel: 'private-regression',
+        evidenceScope: 'engine-core',
+        appliesTo: ['rpg-maker-mv'],
+        capability: 'stable',
+        verifiedFeatures: ['Gold'],
+        reasonCode: 'ok',
+        parserTestIds: ['verify-rpgmaker-roundtrip', 'mv-trial-game-load-1234-to-98765'],
+        verifiedAt: '2026-10-05',
+    },
     {
         id: 'fixture-rpgmaker-mz-core',
         gameSlug: 'rpg-maker',

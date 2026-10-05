@@ -1,6 +1,6 @@
 # SaveFileTool
 
-> Browser-based RPG Maker MZ save editor for tested local .rmmzsave files.
+> Browser-based RPG Maker MZ .rmmzsave and MV .rpgsave editors. MV gold editing verified in an official trial project.
 
 For full documentation, see: https://savefiletool.com/llms-full.txt
 
@@ -8,6 +8,7 @@ For full documentation, see: https://savefiletool.com/llms-full.txt
 
 - /
 - /editor/rpg-maker-mz/
+- /editor/rpg-maker-mv/
 - /faq/
 - /support/
 - /about/
@@ -19,6 +20,7 @@ For full documentation, see: https://savefiletool.com/llms-full.txt
 ## Published Editor Scope
 
 - RPG Maker MZ: .rmmzsave
+- RPG Maker MV: .rpgsave; official MV 1.6.1 trial project gold round trip (1234 to 98765, loaded in game)
 
 Other RPG Maker extensions are candidates only and are not part of the public support promise until real-save verification is complete.
 

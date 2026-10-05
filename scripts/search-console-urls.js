@@ -5,6 +5,7 @@ const urls = [
     '/llms.txt',
     '/llms-full.txt',
     '/editor/rpg-maker-mz',
+    '/editor/rpg-maker-mv',
     '/about',
     '/faq',
     '/support',

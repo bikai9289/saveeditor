@@ -1,22 +1,4 @@
-import { createUploadTicket } from '../lib/upload-vault';
-
-const PUBLIC_RPG_MAKER_EXTENSIONS = new Set(['.rmmzsave']);
-
-function extensionOf(fileName: string): string {
-    const index = fileName.lastIndexOf('.');
-    return index === -1 ? '' : fileName.slice(index).toLowerCase();
-}
-
-function editorPath(locale?: string | null): string {
-    const lang = locale && locale !== 'en' ? `/${locale}` : '';
-    return `${lang}/editor/rpg-maker-mz/`;
-}
-
-function appendUploadToken(path: string, token: string): string {
-    const url = new URL(path, window.location.origin);
-    url.searchParams.set('fileToken', token);
-    return `${url.pathname}${url.search}`;
-}
+import { beginEditorFlow, isRpgMakerSaveFile } from '../lib/ingest';
 
 const initFileUpload = () => {
     const fileInput = document.getElementById('smart-file-input') as HTMLInputElement | null;
@@ -32,18 +14,18 @@ const initFileUpload = () => {
     };
 
     const handleFile = async (file: File) => {
-        if (!PUBLIC_RPG_MAKER_EXTENSIONS.has(extensionOf(file.name))) {
-            alert('This public editor currently accepts tested RPG Maker MZ .rmmzsave files only.');
+        if (!isRpgMakerSaveFile(file.name)) {
+            alert('Choose an RPG Maker MV .rpgsave or MZ .rmmzsave file.');
             return;
         }
 
         try {
             setBusyState(true);
-            const ticket = await createUploadTicket(file, {
+            const { url } = await beginEditorFlow(file, {
                 locale: currentLang,
                 source: 'home-rpg-maker',
             });
-            window.location.assign(appendUploadToken(editorPath(ticket.locale), ticket.token));
+            window.location.assign(url);
         } catch (error) {
             console.error(error);
             alert('We could not open this file in your browser. Please try again from the RPG Maker editor page.');

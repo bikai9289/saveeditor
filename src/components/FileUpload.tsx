@@ -76,7 +76,9 @@ export default function FileUpload({ onFileSelect, accept }: FileUploadProps) {
         </p>
 
         <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-400 max-w-md">
-          <span className="bg-gray-100 px-2 py-1 rounded">.rmmzsave</span>
+          {(accept || '.rmmzsave,.rpgsave').split(',').map(extension => (
+            <span key={extension} className="bg-gray-100 px-2 py-1 rounded">{extension.trim()}</span>
+          ))}
           <span className="bg-gray-100 px-2 py-1 rounded">tested public entry</span>
         </div>
       </label>

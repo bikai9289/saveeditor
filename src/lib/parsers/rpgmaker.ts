@@ -209,7 +209,7 @@ export async function parseRPGMakerMV(file: File): Promise<ParseOutcome<RPGMaker
                 roundTripSupport: 'stable',
             },
             data: payload,
-            diagnostics: { compressionType },
+            diagnostics: { compressionType, originalRootKeys: Object.keys(saveData).filter(key => key !== '_compressionType') },
         });
     } catch (error: any) {
         if (debug) console.error('RPG Maker parse error:', error);
@@ -363,8 +363,10 @@ export async function buildRPGMakerMV(originalFile: File, input: any): Promise<B
 
     const saveData = JSON.parse(JSON.stringify(payload));
     delete saveData._compressionType;
-    delete saveData.gold;
-    delete saveData.level;
+    const originalRootKeys = parsed.diagnostics?.originalRootKeys as string[];
+    for (const key of ['gold', 'level', 'variables', 'switches', 'items', 'party', 'actors', 'system']) {
+        if (!originalRootKeys.includes(key)) delete saveData[key];
+    }
 
     const json = JSON.stringify(saveData);
 

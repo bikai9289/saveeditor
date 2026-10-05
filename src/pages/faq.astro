@@ -36,7 +36,7 @@ const faqCategories = [
       {
         question: 'What file formats are supported?',
         answer:
-          'The public editor currently accepts tested RPG Maker MZ .rmmzsave files. .rpgsave and older RPG Maker extensions will be added only after real-save verification.',
+          'Separate public editors accept MZ .rmmzsave and MV .rpgsave files. MV gold editing was verified in an official MV 1.6.1 trial project, from 1234 to 98765 with successful game loading. Older RPG Maker formats remain outside public support.',
       },
       {
         question: 'Can I edit other game engines?',
@@ -55,14 +55,14 @@ const faqCategories = [
     icon: 'folder',
     questions: [
       {
-        question: 'Where are RPG Maker MZ saves located?',
+        question: 'Where are RPG Maker MV and MZ saves located?',
         answer:
-          'Many desktop RPG Maker MZ games store saves under the game folder in save.',
+          'Desktop MZ games commonly use save/ inside the game folder. MV games commonly use www/save/ or save/. Browser-only games may keep saves in browser storage instead of a disk file.',
       },
       {
         question: 'How do I know which file to choose?',
         answer:
-          'Choose the actual RPG Maker MZ save slot file, such as file1.rmmzsave. Do not select an executable, archive, or unrelated game asset.',
+          'Choose the actual save slot file: file1.rpgsave for the MV editor or file1.rmmzsave for MZ. Do not select an executable, archive, or unrelated game asset.',
       },
     ],
   },
@@ -73,7 +73,7 @@ const faqCategories = [
       {
         question: 'How do I edit gold or money?',
         answer:
-          'Choose a tested .rmmzsave file, find the gold or money field, change it carefully, then download and test the new file.',
+          'Choose an MV .rpgsave or MZ .rmmzsave file in the matching editor, change the gold or money field, then download and load the edited file in game.',
       },
       {
         question: 'Can I edit items, variables, and switches?',
@@ -94,7 +94,7 @@ const faqCategories = [
       {
         question: "Why does the editor show 'Invalid file' or 'Parse error'?",
         answer:
-          'The file may not be a tested .rmmzsave file, may be encrypted, or may use a custom structure.',
+          'Check that you selected .rpgsave on the MV page or .rmmzsave on MZ. Encrypted files and custom plugin structures may fail to parse.',
       },
       {
         question: "My game won't load the edited save. What now?",
@@ -115,7 +115,7 @@ const allQuestions = faqCategories.flatMap((cat) => cat.questions);
 
 <BaseLayout
   title="RPG Maker Save Editor FAQ | SaveFileTool"
-  description="Answers to common questions about using SaveFileTool for tested RPG Maker MZ .rmmzsave files."
+  description="Answers about RPG Maker MV and MZ save editing, supported formats, backups, and finding desktop save files."
   keywords="rpg maker mz save editor faq, rmmzsave editor help"
 >
   <section class="bg-slate-950 py-16 text-white">
@@ -124,7 +124,7 @@ const allQuestions = faqCategories.flatMap((cat) => cat.questions);
         RPG Maker Save Editor FAQ
       </h1>
       <p class="mx-auto max-w-2xl text-xl text-gray-300">
-        Scope, backups, file locations, and troubleshooting for tested RPG Maker MZ saves.
+        Scope, backups, file locations, and troubleshooting for RPG Maker MV and MZ saves.
       </p>
     </div>
   </section>
