@@ -1,6 +1,10 @@
 # SaveFileTool
 
-Browser-based RPG Maker MZ `.rmmzsave` and MV `.rpgsave` editing.
+SaveFileTool is a browser-based save editor for RPG Maker MZ `.rmmzsave` and MV `.rpgsave` files.
+
+[Open SaveFileTool](https://savefiletool.com) | [MZ editor](https://savefiletool.com/editor/rpg-maker-mz/) | [MV editor](https://savefiletool.com/editor/rpg-maker-mv/)
+
+![SaveFileTool MV editor showing a verified gold edit](docs/assets/savefiletool-editor.png)
 
 The public site offers separate MZ and MV editors, each restricted to its published extension.
 
@@ -27,10 +31,6 @@ npm run build
 ```
 
 The production build prerenders the public RPG Maker editor, FAQ, support, and legal pages.
-
-## Contact Email
-
-The contact form sends through Resend from the server-side Cloudflare route `/api/contact`; it does not require a mail client on the visitor's device. Configure `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `SUPPORT_EMAIL` as Cloudflare secrets or environment variables before deployment. The sender domain must be verified in Resend.
 
 ## Indexing Helpers
 
